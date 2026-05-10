@@ -4,8 +4,10 @@
 # @Author      : Felix Cui
 # @Email       : cuihediyzu@gmail.com
 # @File        : testgitpush.py
-# @PythonEnv   : Python 3.11 (dev-py311-env)
+# @PythonEnv   : Python 3.12 (pythonautotest-py312)
 # @IDE         : PyCharm
-# @Description :
+# @Description : git push, change dev env
 
 # 折腾够呛，哈哈，给我传上去！！！
+
+import sys; print(sys.executable); print(sys.version)
