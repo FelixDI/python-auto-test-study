@@ -20,23 +20,32 @@ flowchart LR
 # Python 自动化测试学习
   最终目标：实战 Selenium + Pytest 自动化测试项目
 
-```
 ## 目录结构
-    python-automation-test-study/  # 项目根目录
-├── README.md          
-├── docs/           #学习笔记
-├── src/            #练习代码
-├── config/         #配置文件
+
+```
+python-auto-test-study/
+├── .gitignore
+├── README.md
 ├── requirements.txt
-└── .gitignore
+├── docs/
+│   ├── 01-搭建环境踩坑.md
+│   ├── 02-study自动化测试理论.md
+│   └── 03-核心Python基础语法review.md
+├── src/
+│   ├── base/               # 基础操作封装 (BasePage 等)
+│   ├── pages/              # 页面对象 (LoginPage 等)
+│   ├── test_cases/         # 测试用例 (test_login.py 等)
+│   ├── utils/              # 工具函数 (日志、截图等)
+│   └── exercises/          # Python 练习代码 (语法、类、异常等)
+└── config/                 # 配置文件目录
 ```
 
 ## 学习进度
 - 01 环境搭建完成 ✅
      miniforge+pycharm+git+github
 - 02 Python 基础学习中 🔄
-     core python programing 书太厚太全面了学了就忘。
-     Python 基础语法回顾（自动化测试必备）
+     core python programing 书太厚太全面了跟着敲代码还是学了就忘。
+     Python 基础语法回顾（面向自动化测试）
      目标复习自动化测试高频用到的 Python 语法，夯实基础。
 
     ### 学习重点
