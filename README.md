@@ -14,3 +14,31 @@ flowchart LR
     F -.-> G[Selenium / Playwright]
     
     D --> H[准备求职<br>简历 + 项目 + 面试题]
+
+
+
+# Python 自动化测试学习
+  最终目标：实战 Selenium + Pytest 自动化测试项目
+
+## 目录结构
+    python-automation-test-study/  # 项目根目录
+├── README.md          
+├── docs/           #学习笔记
+├── src/            #练习代码
+├── config/         #配置文件
+├── requirements.txt
+└── .gitignore
+
+## 学习进度
+- 01 环境搭建完成 ✅
+     miniforge+pycharm+git+github
+- 02 Python 基础学习中 🔄
+     core python programing 书太厚太全面了学了就忘。
+     Python 基础语法回顾（自动化测试必备）
+     目标复习自动化测试高频用到的 Python 语法，夯实基础。
+
+    ### 学习重点
+    1.  类与继承：`class BasePage` 封装基础操作，所有页面对象继承
+    2.  异常处理：`try-except` 捕获元素定位超时、操作失败
+    3.  文件与配置读取：`configparser` 读取 `.ini` 配置文件
+    4.  列表/字典/循环：处理测试数据、批量执行用例
