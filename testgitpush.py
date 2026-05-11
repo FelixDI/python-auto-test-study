@@ -8,7 +8,7 @@
 # @IDE         : PyCharm
 # @Description : git push, change dev env
 
-# 折腾够呛，哈哈，给我传上去！！！
+# 踩坑折腾够呛，哈哈，给我传上去！！！
 
 import sys; print(sys.executable); print(sys.version)
 
@@ -24,7 +24,7 @@ import sys; print(sys.executable); print(sys.version)
 # test:	测试	新增或修改测试用例
 # chore:	杂项	改配置、装依赖、环境切换
 
-# c初学者经常写测试脚本、练手项目，建议新建项目时
+# 初学者经常写测试脚本、练手项目，建议新建项目时
 # 默认不勾选 Create Git repository
 # 只有在确定需要版本控制或推送到 GitHub 时，才手动：
 # 创建 .gitignore
