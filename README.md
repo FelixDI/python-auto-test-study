@@ -41,6 +41,7 @@ python-auto-test-study/
 ```
 
 ## 学习进度
+```
 - 01 环境搭建完成 ✅
      miniforge+pycharm+git+github
 - 02 Python 基础学习中 🔄
@@ -53,3 +54,4 @@ python-auto-test-study/
     2.  异常处理：`try-except` 捕获元素定位超时、操作失败
     3.  文件与配置读取：`configparser` 读取 `.ini` 配置文件
     4.  列表/字典/循环：处理测试数据、批量执行用例
+```
