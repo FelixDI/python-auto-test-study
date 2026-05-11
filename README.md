@@ -20,6 +20,7 @@ flowchart LR
 # Python 自动化测试学习
   最终目标：实战 Selenium + Pytest 自动化测试项目
 
+```
 ## 目录结构
     python-automation-test-study/  # 项目根目录
 ├── README.md          
@@ -28,6 +29,7 @@ flowchart LR
 ├── config/         #配置文件
 ├── requirements.txt
 └── .gitignore
+```
 
 ## 学习进度
 - 01 环境搭建完成 ✅
