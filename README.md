@@ -22,23 +22,31 @@ flowchart LR
 
 ## 目录结构
 
+<!-- PROJECT_STRUCTURE_START -->
 ```
-python-auto-test-study/
-├── .gitignore
+PythonAutoTest/
+├── docs/
+│   ├── 01_搭建环境踩坑.md
+│   └── 02_测试理论.md
+├── src/
+│   └── exercises/
+│       └── pythonreview/
+│           ├── 01_variables.py
+│           ├── 02_datastructure.py
+│           ├── 03_controlflow.py
+│           ├── 04_functions.py
+│           ├── combine123_testdataprocess.py
+│           └── combine123_testreports.py
 ├── README.md
 ├── requirements.txt
-├── docs/
-│   ├── 01-搭建环境踩坑.md
-│   ├── 02-study自动化测试理论.md
-│   └── 03-核心Python基础语法review.md
-├── src/
-│   ├── base/               # 基础操作封装 (BasePage 等)
-│   ├── pages/              # 页面对象 (LoginPage 等)
-│   ├── test_cases/         # 测试用例 (test_login.py 等)
-│   ├── utils/              # 工具函数 (日志、截图等)
-│   └── exercises/          # Python 练习代码 (语法、类、异常等)
-└── config/                 # 配置文件目录
+├── testgitpush.py
+└── update_tree.py
+
+5 directories, 12 files
 ```
+<!-- PROJECT_STRUCTURE_END -->
+
+
 
 ## 学习进度
 ```
@@ -47,7 +55,7 @@ python-auto-test-study/
 - 02 Python 基础学习中 🔄
      core python programing 书太厚太全面了跟着敲代码还是学了就忘。
      Python 基础语法回顾（面向自动化测试）
-     目标复习自动化测试高频用到的 Python 语法，夯实基础。
+     目标复习自动化测试高频用到的 Python 语法。
 
     ### 学习重点
     1.  类与继承：`class BasePage` 封装基础操作，所有页面对象继承
