@@ -6,7 +6,11 @@
 # @File        : update_tree.py
 # @PythonEnv   : Python 3.12 (pythonautotest-py312)
 # @IDE         : PyCharm
-# @Description : auto update project structure in README.md by git hooks
+# @Description : local auto update project structure in README.md by git hooks
+
+# 实际项目中可以结合两者：
+# GitHub Actions：云工作流团队项目，负责线上定时更新、push 后自动运行的主流程
+# 本地 pre-commit hook（可选）：在提交前做快速验证（如拼写检查、数据格式校验），减少 Actions 运行失败的概率
 
 
 #!/usr/bin/env python3
