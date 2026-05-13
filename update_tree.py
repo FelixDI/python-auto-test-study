@@ -6,7 +6,7 @@
 # @File        : update_tree.py
 # @PythonEnv   : Python 3.12 (pythonautotest-py312)
 # @IDE         : PyCharm
-# @Description : auto update project structure by git hooks
+# @Description : auto update project structure in README.md by git hooks
 
 
 #!/usr/bin/env python3
