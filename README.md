@@ -35,6 +35,7 @@ PythonAutoTest/
 │           ├── 02_datastructure.py
 │           ├── 03_controlflow.py
 │           ├── 04_functions.py
+│           ├── 05_OOPaboutclass.py
 │           ├── combine123_testdataprocess.py
 │           └── combine123_testreports.py
 ├── README.md
@@ -42,7 +43,7 @@ PythonAutoTest/
 ├── testgitpush.py
 └── update_tree.py
 
-5 directories, 12 files
+5 directories, 13 files
 ```
 <!-- PROJECT_STRUCTURE_END -->
 
