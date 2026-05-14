@@ -55,8 +55,7 @@ PythonAutoTest/
      miniforge+pycharm+git+github
 - 02 Python 基础学习中 🔄
      core python programing 书太厚太全面了跟着敲代码还是学了就忘。
-     Python 基础语法回顾（面向自动化测试）
-     目标复习自动化测试高频用到的 Python 语法。
+     Python 基础语法回顾（面向自动化测试）目标复习自动化测试高频用到的 Python 语法。
 
     ### 学习重点
     1.  类与继承：`class BasePage` 封装基础操作，所有页面对象继承
