@@ -37,13 +37,15 @@ PythonAutoTest/
 │           ├── 04_functions.py
 │           ├── 05_OOPaboutclass.py
 │           ├── combine123_testdataprocess.py
-│           └── combine123_testreports.py
+│           ├── combine123_testreports.py
+│           ├── combine45_classBaseTest.py
+│           └── combine45_runtestcase.py
 ├── README.md
 ├── requirements.txt
 ├── testgitpush.py
 └── update_tree.py
 
-5 directories, 13 files
+5 directories, 15 files
 ```
 <!-- PROJECT_STRUCTURE_END -->
 
