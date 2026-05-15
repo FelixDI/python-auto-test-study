@@ -105,3 +105,101 @@ def main():
 if __name__ == "__main__":
     from datetime import datetime
     main()
+
+
+## runner.py - 简易测试用例执行器（完整版）
+# import sys
+# from pathlib import Path
+# import logging
+#
+# # 添加当前目录到搜索路径
+# sys.path.insert(0, str(Path(__file__).parent))
+#
+# from utils import (
+#     setup_logging,
+#     load_json,
+#     read_txt,
+#     ensure_dir_os,
+#     clean_old_reports,
+#     generate_txt_report,
+#     get_data_dir,
+#     get_reports_dir,
+# )
+#
+# def fake_api_call(method, url, body):
+#     """模拟接口调用：根据请求体内容返回状态码"""
+#     if body:
+#         if not body.get("username"):
+#             return 400
+#         if not body.get("password"):
+#             return 400
+#         return 200
+#     return 404
+#
+# def main():
+#     # 1. 初始化日志
+#     setup_logging("INFO")
+#     logger = logging.getLogger(__name__)
+#
+#     # 2. 加载配置和测试数据
+#     data_dir = get_data_dir()
+#     config = load_json(data_dir / "config.json")
+#     logger.info(f"配置加载完成，base_url={config['base_url']}")
+#
+#     # 演示读取 txt 文件（作为模板或日志示例）
+#     sample_txt = read_txt(data_dir / "sample.txt")
+#     logger.info(f"读取到示例文本长度: {len(sample_txt)} 字符")
+#
+#     # 读取 JSON 格式的测试用例
+#     test_cases = load_json(data_dir / "test_cases.json")
+#     logger.info(f"从 JSON 加载了 {len(test_cases)} 条用例")
+#
+#     # 3. 准备报告目录（使用 os.makedirs）
+#     reports_dir = get_reports_dir()
+#     ensure_dir_os(reports_dir)          # 如果没有则创建
+#     clean_old_reports(reports_dir)      # 清理旧报告
+#
+#     # 4. 执行测试用例，单个失败不影响整体
+#     results = []
+#     for case in test_cases:
+#         case_id = case["id"]
+#         desc = case.get("desc", "")
+#         method = case.get("method", "GET")
+#         url = case.get("url", "")
+#         body = case.get("body", {})
+#         expected = case.get("expected_code", 200)
+#
+#         logger.info(f"执行 {case_id}: {desc}")
+#
+#         try:
+#             actual = fake_api_call(method, url, body)
+#             if actual == expected:
+#                 results.append({"id": case_id, "desc": desc, "status": "PASS"})
+#                 logger.info(f"  PASS (expected {expected}, got {actual})")
+#             else:
+#                 error_msg = f"状态码不匹配，期望 {expected}，实际 {actual}"
+#                 results.append({"id": case_id, "desc": desc, "status": "FAIL", "error": error_msg})
+#                 logger.error(f"  FAIL - {error_msg}")
+#         except Exception as e:
+#             # 任何意外异常都会被捕获，不影响后续用例
+#             results.append({"id": case_id, "desc": desc, "status": "ERROR", "error": str(e)})
+#             logger.exception(f"  ERROR - 用例执行异常: {e}")
+#
+#     # 5. 生成 txt 报告
+#     report_path = reports_dir / f"test_report_{datetime.now().strftime('%Y%m%d_%H%M%S')}.txt"
+#     generate_txt_report(results, report_path)
+#     logger.info(f"测试报告已生成：{report_path}")
+#
+#     # 6. 控制台输出汇总
+#     passed = sum(1 for r in results if r["status"] == "PASS")
+#     failed = sum(1 for r in results if r["status"] == "FAIL")
+#     errors = sum(1 for r in results if r["status"] == "ERROR")
+#     total = len(results)
+#     logger.info(f"========== 执行完毕 ==========")
+#     logger.info(f"总计: {total}, 通过: {passed}, 失败: {failed}, 错误: {errors}")
+#     if total > 0:
+#         logger.info(f"通过率: {passed/total*100:.1f}%")
+#
+# if __name__ == "__main__":
+#     import datetime  # 忘了导入的话这里补一下
+#     main()
