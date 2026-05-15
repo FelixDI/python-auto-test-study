@@ -1,0 +1,26 @@
+[
+    {
+        "id": "TC001",
+        "desc": "正常登录",
+        "url": "/api/login",
+        "method": "POST",
+        "body": {"username": "admin", "password": "123456"},
+        "expected_code": 200
+    },
+    {
+        "id": "TC002",
+        "desc": "密码为空",
+        "url": "/api/login",
+        "method": "POST",
+        "body": {"username": "admin", "password": ""},
+        "expected_code": 400
+    },
+    {
+        "id": "TC003",
+        "desc": "用户名为空",
+        "url": "/api/login",
+        "method": "POST",
+        "body": {"username": "", "password": "123456"},
+        "expected_code": 400
+    }
+]

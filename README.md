@@ -31,6 +31,11 @@ PythonAutoTest/
 ├── src/
 │   └── exercises/
 │       └── pythonreview/
+│           ├── data/
+│           │   ├── config.json
+│           │   ├── sample.txt
+│           │   ├── test_cases.json
+│           │   └── test_data.csv
 │           ├── 01_variables.py
 │           ├── 02_datastructure.py
 │           ├── 03_controlflow.py
@@ -45,7 +50,7 @@ PythonAutoTest/
 ├── testgitpush.py
 └── update_tree.py
 
-5 directories, 15 files
+6 directories, 19 files
 ```
 <!-- PROJECT_STRUCTURE_END -->
 

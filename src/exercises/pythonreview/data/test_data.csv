@@ -1,0 +1,5 @@
+id,username,password,expected_code
+TC001,admin,123456,200
+TC002,admin,,400
+TC003,test_user,test_pass,200
+TC004,,123456,400
