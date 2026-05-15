@@ -29,7 +29,8 @@ PythonAutoTest/
 │   ├── 01_搭建环境踩坑.md
 │   └── 02_测试理论.md
 ├── reports/
-│   └── test_report_20260515_204020.txt
+│   ├── test_report_20260515_204020.txt
+│   └── test_report_20260515_204741.txt
 ├── src/
 │   └── exercises/
 │       └── pythonreview/
@@ -54,7 +55,7 @@ PythonAutoTest/
 ├── testgitpush.py
 └── update_tree.py
 
-7 directories, 22 files
+7 directories, 23 files
 ```
 <!-- PROJECT_STRUCTURE_END -->
 
