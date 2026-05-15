@@ -31,30 +31,34 @@ PythonAutoTest/
 ├── reports/
 │   └── test_report_20260515_204741.txt
 ├── src/
-│   └── exercises/
-│       └── pythonreview/
-│           ├── data/
-│           │   ├── config.json
-│           │   ├── sample.txt
-│           │   ├── test_cases.json
-│           │   └── test_data.csv
-│           ├── 01_variables.py
-│           ├── 02_datastructure.py
-│           ├── 03_controlflow.py
-│           ├── 04_functions.py
-│           ├── 05_OOPaboutclass.py
-│           ├── combine123_testdataprocess.py
-│           ├── combine123_testreports.py
-│           ├── combine45_classBaseTest.py
-│           ├── combine45_runtestcase.py
-│           ├── runner.py
-│           └── utils.py
+│   ├── exercises/
+│   │   └── pythonreview/
+│   │       ├── data/
+│   │       │   ├── config.json
+│   │       │   ├── sample.txt
+│   │       │   ├── test_cases.json
+│   │       │   └── test_data.csv
+│   │       ├── 01_variables.py
+│   │       ├── 02_datastructure.py
+│   │       ├── 03_controlflow.py
+│   │       ├── 04_functions.py
+│   │       ├── 05_OOPaboutclass.py
+│   │       ├── combine123_testdataprocess.py
+│   │       ├── combine123_testreports.py
+│   │       ├── combine45_classBaseTest.py
+│   │       ├── combine45_runtestcase.py
+│   │       ├── runner.py
+│   │       └── utils.py
+│   └── stage1_pytest_core/
+│       └── test_cases/
+│           └── test_basic.py
+├── pytest.ini
 ├── README.md
 ├── requirements.txt
 ├── testgitpush.py
 └── update_tree.py
 
-7 directories, 22 files
+9 directories, 24 files
 ```
 <!-- PROJECT_STRUCTURE_END -->
 
