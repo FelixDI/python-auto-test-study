@@ -10,6 +10,10 @@
 
 
 import pytest
+#pytest 测试文件的约定俗成——测试文件统一 import pytest，保持一致性，也方便后续随时加跳过、预期失败等标记，不用再补导入。
+
+# pytest 在运行前会找到 test_fixture.py 所在目录及所有上级目录的 conftest.py，
+# 收集里面所有 @pytest.fixture 装饰的函数名，放入一个"可用 fixture 池"
 
 def test_with_user_data(user_data):
     assert user_data["username"]=="admin"

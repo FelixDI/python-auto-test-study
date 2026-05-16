@@ -55,6 +55,7 @@ PythonAutoTest/
 │           ├── test_basic.py
 │           ├── test_fixture.py
 │           ├── test_markers.py
+│           ├── test_mock.py
 │           └── test_parametrize.py
 ├── pytest.ini
 ├── README.md
@@ -62,7 +63,7 @@ PythonAutoTest/
 ├── testgitpush.py
 └── update_tree.py
 
-9 directories, 28 files
+9 directories, 29 files
 ```
 <!-- PROJECT_STRUCTURE_END -->
 
