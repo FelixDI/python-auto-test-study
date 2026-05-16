@@ -6,7 +6,7 @@
 # @File        : test_basic.py
 # @PythonEnv   : Python 3.12 (pythonautotest-py312)
 # @IDE         : PyCharm
-# @Description : pytest assert/raise
+# @Description : pytest assert/raise  test_*func     class Test*
 
 # 核心命令行速记
 # pytest               # 运行所有测试
@@ -59,6 +59,23 @@ def test_expected_exception_passes():
     with pytest.raises(ZeroDivisionError):
         1/0
 
+
+class TestDictionaryOperations:
+
+    def test_dict_create(self):
+        person = {"name":"张三", "age": 30}
+        assert person["name"] == "张三"
+        assert person["age"] == 30
+
+    def test_dict_update(self):
+        person = {"name":"张三", "age":30}
+        person["age"] = 31
+        assert person["age"] == 31
+
+    def test_dict_keys(self):
+        person = {"name":"张三", "age":30}
+        assert "name" in person.keys()
+        assert "age" in person.keys()
 
 # # test_basic.py
 # import pytest

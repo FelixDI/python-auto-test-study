@@ -51,6 +51,7 @@ PythonAutoTest/
 │   │       └── utils.py
 │   └── stage1_pytest_core/
 │       └── test_cases/
+│           ├── conftest.py
 │           ├── test_basic.py
 │           └── test_parametrize.py
 ├── pytest.ini
@@ -59,7 +60,7 @@ PythonAutoTest/
 ├── testgitpush.py
 └── update_tree.py
 
-9 directories, 25 files
+9 directories, 26 files
 ```
 <!-- PROJECT_STRUCTURE_END -->
 
