@@ -16,20 +16,20 @@ def user_data():
     print("\n[前置]准备用户数据")
     data = {"username":"admin", "password":"123456"}
     yield data
-    print(" 后置清理用户数据")
+    print("\n[后置]清理用户数据")
 
 @pytest.fixture(scope="class")
 def db_connection():
     print("\n[类前置]连接数据库")
     conn = {"db":"test_db", "status":"connected"}
     yield conn
-    print("[类后置]关闭数据库连接")
+    print("\n[类后置]关闭数据库连接")
 
 @pytest.fixture(scope="module")
 def module_config():
     print("\n[模块前置]加载模块配置")
     yield{"base_url":"http://test.server"}
-    print("[模块后置]清理模块配置")
+    print("\n[模块后置]清理模块配置")
 
 
 ## conftest.py
