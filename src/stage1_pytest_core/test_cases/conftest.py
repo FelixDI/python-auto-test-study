@@ -91,3 +91,32 @@ def api_client():
 #     yield {"base_url": "http://test.server"}
 #     print("[模块后置] 清理模块配置")
 
+### conftest.py（追加部分）
+# import json
+# import pytest
+# from pathlib import Path
+#
+# # ============ 原有 fixture 保留 ============
+# # ... user_data, db_connection, module_config 不变 ...
+#
+# # ============ 综合实战新增 fixture ============
+# @pytest.fixture(scope="module")
+# def load_test_cases():
+#     """模块级 fixture：加载 JSON 测试数据，整个模块只读一次"""
+#     data_dir = Path(__file__).parent.parent / "data"
+#     with open(data_dir / "test_cases.json", "r", encoding="utf-8") as f:
+#         return json.load(f)
+#
+# @pytest.fixture
+# def api_client():
+#     """模拟 API 客户端"""
+#     class FakeAPIClient:
+#         def post(self, url, body):
+#             username = body.get("username", "")
+#             password = body.get("password", "")
+#             if not username or not password:
+#                 return {"code": 400, "msg": "参数缺失"}
+#             if username == "admin" and password == "123456":
+#                 return {"code": 200, "msg": "登录成功"}
+#             return {"code": 401, "msg": "用户名或密码错误"}
+#     return FakeAPIClient()
