@@ -50,6 +50,8 @@ PythonAutoTest/
 │   │       ├── runner.py
 │   │       └── utils.py
 │   └── stage1_pytest_core/
+│       ├── data/
+│       │   └── test_cases.json
 │       └── test_cases/
 │           ├── conftest.py
 │           ├── temptest.py
@@ -65,7 +67,7 @@ PythonAutoTest/
 ├── testgitpush.py
 └── update_tree.py
 
-9 directories, 31 files
+10 directories, 32 files
 ```
 <!-- PROJECT_STRUCTURE_END -->
 
