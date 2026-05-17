@@ -49,27 +49,30 @@ PythonAutoTest/
 │   │       ├── combine45_runtestcase.py
 │   │       ├── runner.py
 │   │       └── utils.py
-│   └── stage1_pytest_core/
-│       ├── data/
-│       │   └── test_cases.json
-│       └── test_cases/
-│           ├── conftest.py
-│           ├── temptest.py
-│           ├── test_basic.py
-│           ├── test_fixture.py
-│           ├── test_markers.py
-│           ├── test_mock_external.py
-│           ├── test_mock.py
-│           ├── test_parametrize.py
-│           ├── test_unittest_demo.py
-│           └── test_user_api.py
+│   ├── stage1_pytest_core/
+│   │   ├── data/
+│   │   │   └── test_cases.json
+│   │   └── test_cases/
+│   │       ├── conftest.py
+│   │       ├── temptest.py
+│   │       ├── test_basic.py
+│   │       ├── test_fixture.py
+│   │       ├── test_markers.py
+│   │       ├── test_mock_external.py
+│   │       ├── test_mock.py
+│   │       ├── test_parametrize.py
+│   │       ├── test_unittest_demo.py
+│   │       └── test_user_api.py
+│   └── stage2_api_test/
+│       └── data/
+│           └── db.json
 ├── pytest.ini
 ├── README.md
 ├── requirements.txt
 ├── testgitpush.py
 └── update_tree.py
 
-10 directories, 34 files
+12 directories, 35 files
 ```
 <!-- PROJECT_STRUCTURE_END -->
 
