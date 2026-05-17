@@ -12,6 +12,7 @@ import pytest
 from unittest.mock import Mock,MagicMock,patch
 import requests
 
+
 def test_mock_basic():
     fake_api = Mock()
     fake_api.get_user.return_value = {"name":"张三", "age":25}
@@ -41,12 +42,20 @@ def test_magic_mock():
     assert fake_dict["any_key"] == "mocked_value"
     assert len(fake_dict) == 3
 
-# 如果是【函数内部导入】→ 写 @patch("原始模块名.函数名")
+# 如果是【函数内部导入】→ 写 @patch("原始模块名.函数名") 没有导入全局变量 会去找 官方模块
 #     ↓
-# 如果是【模块顶部导入】→ 写 @patch("被测试代码所在的模块名.变量名")
+# 如果是【模块顶部导入】→ 写 @patch("被测试代码所在的模块名.变量名")  本模块、跨模块
 #     ↓
 #     → 如果导入方式是 import time → 变量名是 time.sleep
-#     → 如果导入方式是 from time import sleep → 变量名是 sleep    不建议 容易混乱
+#     → 如果导入方式是 from time import sleep → 变量名是 sleep    # 不建议 容易混乱
+
+# @patch("被 Mock 的那个变量实际所在的模块.变量名")    通用所有情况：本模块  跨模块（自己写的模块、官方模块）
+
+# 如果业务代码是第三方库、或者是不敢动的核心历史代码，那就只能同时 patch 两个地方,例如:
+# # 同时patch顶部导入和函数内部导入
+# @patch("被 Mock 的那个变量实际所在的模块.requests.get")
+# @patch("requests.get")
+
 
 # 采用完整路径调用能规避很多调用错误
 # @patch("requests.get")  # 简写不推荐 容易和函数内部导入的情况混淆
