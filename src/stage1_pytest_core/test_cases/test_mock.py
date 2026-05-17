@@ -41,8 +41,16 @@ def test_magic_mock():
     assert fake_dict["any_key"] == "mocked_value"
     assert len(fake_dict) == 3
 
+# 如果是【函数内部导入】→ 写 @patch("原始模块名.函数名")
+#     ↓
+# 如果是【模块顶部导入】→ 写 @patch("被测试代码所在的模块名.变量名")
+#     ↓
+#     → 如果导入方式是 import time → 变量名是 time.sleep
+#     → 如果导入方式是 from time import sleep → 变量名是 sleep    不建议 容易混乱
 
-@patch("requests.get")
+# 采用完整路径调用能规避很多调用错误
+# @patch("requests.get")  # 简写不推荐 容易和函数内部导入的情况混淆
+@patch("test_mock.requests.get")
 def test_patch_requests_get(mock_get):
     mock_response = Mock()
     mock_response.status_code = 200
@@ -67,6 +75,8 @@ def test_patch_context():
 
 def send_notification(user_id):
     from time import sleep
+    # import time        不管哪种导入形式 因为是函数内导入 均采用   @patch("原始模块名.函数名")
+    # time.sleep(0.1)
     sleep(0.1)
     return f"通知已发送给客户{user_id}"
 
