@@ -9,6 +9,9 @@
 # @Description : pytest 实现代码共享和插件化的文件，让 fixture、钩子等可以被同一目录树下的所有测试文件自动发现和使用
 
 import pytest
+import json
+from pathlib import Path
+
 
 # 参数默认值scope="function"
 @pytest.fixture
@@ -30,6 +33,33 @@ def module_config():
     print("\n[模块前置]加载模块配置")
     yield{"base_url":"http://test.server"}
     print("\n[模块后置]清理模块配置")
+
+
+@pytest.fixture(scope="module")
+def load_test_cases():
+    data_dir = Path(__file__).parent.parent/"data"
+    with open(data_dir/"test_cases.json", "r", encoding="utf-8") as f:
+        return json.load(f)
+
+
+@pytest.fixture
+def api_client():
+    class FakeApiClient:
+        def post(self, url, body):
+            username = body.get("username", "")
+            password = body.get("password", "")
+            if not username or not password:
+                return {"code":400, "msg":"用户名或密码为空"}
+
+            if username=="admin" and password=="123456":
+                return {"code":200, "msg":"登录成功"}
+
+            return {"code":401, "msg":"用户名或密码错误"}
+
+    return FakeApiClient()
+
+
+
 
 
 ## conftest.py
