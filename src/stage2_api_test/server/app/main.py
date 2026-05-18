@@ -160,7 +160,12 @@ def read_user(user_id: int, db=Depends(get_db)):
     return db_user
 
 @app.put("/users/{user_id}", response_model=User, tags=["用户管理"])
-def update_user(user_id: int, user: UserCreate, db=Depends(get_db)):
+def update_user(
+    user_id: int,
+    user: UserCreate,
+    db=Depends(get_db),
+    current_user: DBUser = Depends(get_current_user)  # ✅ 需要鉴权
+):
     db_user = db.query(DBUser).filter(DBUser.id == user_id).first()
     if db_user is None:
         raise HTTPException(status_code=404, detail="用户不存在")
@@ -172,7 +177,11 @@ def update_user(user_id: int, user: UserCreate, db=Depends(get_db)):
     return db_user
 
 @app.delete("/users/{user_id}", tags=["用户管理"])
-def delete_user(user_id: int, db=Depends(get_db)):
+def delete_user(
+    user_id: int,
+    db=Depends(get_db),
+    current_user: DBUser = Depends(get_current_user)  # ✅ 需要鉴权
+):
     db_user = db.query(DBUser).filter(DBUser.id == user_id).first()
     if db_user is None:
         raise HTTPException(status_code=404, detail="用户不存在")
