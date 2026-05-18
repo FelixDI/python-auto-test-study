@@ -64,15 +64,22 @@ PythonAutoTest/
 │   │       ├── test_unittest_demo.py
 │   │       └── test_user_api.py
 │   └── stage2_api_test/
-│       └── data/
-│           └── db.json
+│       ├── data/
+│       │   └── test_cases.json
+│       ├── server/
+│       │   ├── app/
+│       │   │   └── main.py
+│       │   ├── Dockerfile
+│       │   └── requirements.txt
+│       ├── test_cases/
+│       └── conftest.py
 ├── pytest.ini
 ├── README.md
 ├── requirements.txt
 ├── testgitpush.py
 └── update_tree.py
 
-12 directories, 35 files
+15 directories, 39 files
 ```
 <!-- PROJECT_STRUCTURE_END -->
 
