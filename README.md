@@ -54,7 +54,6 @@ PythonAutoTest/
 │   │   │   └── test_cases.json
 │   │   └── test_cases/
 │   │       ├── conftest.py
-│   │       ├── temptest.py
 │   │       ├── test_basic.py
 │   │       ├── test_fixture.py
 │   │       ├── test_markers.py
@@ -71,8 +70,9 @@ PythonAutoTest/
 │       │   │   └── main.py
 │       │   ├── Dockerfile
 │       │   └── requirements.txt
-│       ├── test_cases/
-│       └── conftest.py
+│       └── test_cases/
+│           ├── conftest.py
+│           └── test_auth.py
 ├── pytest.ini
 ├── README.md
 ├── requirements.txt
