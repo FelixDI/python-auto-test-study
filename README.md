@@ -74,6 +74,7 @@ PythonAutoTest/
 │           ├── test_auth_fixture.py
 │           ├── test_auth.py
 │           ├── test_debug.py
+│           ├── test_mock_external.py
 │           ├── test_param_auth.py
 │           ├── test_schema.py
 │           └── test_users_crud.py
@@ -84,7 +85,7 @@ PythonAutoTest/
 ├── testgitpush.py
 └── update_tree.py
 
-15 directories, 44 files
+15 directories, 45 files
 ```
 <!-- PROJECT_STRUCTURE_END -->
 
