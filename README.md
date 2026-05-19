@@ -29,6 +29,7 @@ PythonAutoTest/
 │   ├── 01_搭建环境踩坑.md
 │   └── 02_测试理论.md
 ├── reports/
+│   ├── stage2_final_report.html
 │   └── test_report_20260515_204741.txt
 ├── src/
 │   ├── exercises/
@@ -74,6 +75,7 @@ PythonAutoTest/
 │           ├── test_auth_fixture.py
 │           ├── test_auth.py
 │           ├── test_debug.py
+│           ├── test_integration.py
 │           ├── test_mock_external.py
 │           ├── test_param_auth.py
 │           ├── test_schema.py
@@ -84,7 +86,7 @@ PythonAutoTest/
 ├── testgitpush.py
 └── update_tree.py
 
-15 directories, 44 files
+15 directories, 46 files
 ```
 <!-- PROJECT_STRUCTURE_END -->
 

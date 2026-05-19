@@ -15,7 +15,8 @@ import time
 class TestAuth:
     # base_url fixture 自动注入  (conftest.py)
     def test_register_success(self, base_url):
-        unique_id = int(time.time())
+        # unique_id = int(time.time())
+        unique_id = int(time.time_ns())
         unique_name = f"testuser_{unique_id}"
 
         payload = {
