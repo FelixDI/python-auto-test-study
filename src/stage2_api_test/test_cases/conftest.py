@@ -93,7 +93,7 @@ def auth_token(base_url):
 
 @pytest.fixture
 def auth_headers(auth_token):
-    return {"Authorization": f"Bearer{auth_token}"}
+    return {"Authorization":f"Bearer {auth_token}"}      # Bearer {}  与调用之间一定要留空格！！！
 
 
 # import pytest
