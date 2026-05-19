@@ -81,11 +81,10 @@ PythonAutoTest/
 ├── pytest.ini
 ├── README.md
 ├── requirements.txt
-├── test.db
 ├── testgitpush.py
 └── update_tree.py
 
-15 directories, 45 files
+15 directories, 44 files
 ```
 <!-- PROJECT_STRUCTURE_END -->
 

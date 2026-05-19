@@ -39,35 +39,35 @@ def base_url():
 # import requests
 # from sqlalchemy import create_engine, text
 
-# ==================== 数据库引擎 ====================
-@pytest.fixture(scope="module")
-def db_engine():
-    engine = create_engine(
-        "sqlite:///./test.db",
-        connect_args={"check_same_thread": False}
-    )
-    # 核心改动：直接执行SQL建表，不再导入FastAPI模型
-    with engine.connect() as conn:
-        conn.execute(text("""
-            CREATE TABLE IF NOT EXISTS users (
-                id INTEGER PRIMARY KEY AUTOINCREMENT,
-                username VARCHAR NOT NULL UNIQUE,
-                email VARCHAR NOT NULL UNIQUE,
-                hashed_password VARCHAR NOT NULL,
-                is_active BOOLEAN DEFAULT 1
-            )
-        """))
-        conn.commit()
-    return engine
-
-# ==================== 数据清理 ====================
-@pytest.fixture(autouse=True)
-def clean_database(db_engine):
-    yield
-    # 在测试函数执行后，用 SQL 清空数据
-    with db_engine.connect() as conn:
-        conn.execute(text("DELETE FROM users"))
-        conn.commit()
+# # ==================== 数据库引擎 ====================
+# @pytest.fixture(scope="module")
+# def db_engine():
+#     engine = create_engine(
+#         "sqlite:///./test.db",
+#         connect_args={"check_same_thread": False}
+#     )
+#     # 核心改动：直接执行SQL建表，不再导入FastAPI模型
+#     with engine.connect() as conn:
+#         conn.execute(text("""
+#             CREATE TABLE IF NOT EXISTS users (
+#                 id INTEGER PRIMARY KEY AUTOINCREMENT,
+#                 username VARCHAR NOT NULL UNIQUE,
+#                 email VARCHAR NOT NULL UNIQUE,
+#                 hashed_password VARCHAR NOT NULL,
+#                 is_active BOOLEAN DEFAULT 1
+#             )
+#         """))
+#         conn.commit()
+#     return engine
+#
+# # ==================== 数据清理 ====================
+# @pytest.fixture(autouse=True)
+# def clean_database(db_engine):
+#     yield
+#     # 在测试函数执行后，用 SQL 清空数据
+#     with db_engine.connect() as conn:
+#         conn.execute(text("DELETE FROM users"))
+#         conn.commit()
 
 # ... 其余 fixture (base_url, auth_token, auth_headers) 保持不变 ...
 
@@ -132,7 +132,6 @@ def test_result():
         pass_rate =(passed/total*100) if total>0 else 0
         f.write(f"通过率:{pass_rate:.1f}%\n")
     print(f"\n📄TXT报告已生成:{report_path}")
-
 
 
 # # 当你给钩子函数加上 hookwrapper=True 时，yield 语句返回的是一个 pluggy.Result 类的实例（也就是 outcome 变量）
