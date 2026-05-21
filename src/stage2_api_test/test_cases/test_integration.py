@@ -32,20 +32,21 @@ class TestUserJourney:
             "password":self.password,
             "email":self.email,
         }
-
+        # #测试代码要适配后端代码的实现（fastapi 简易web main.py） 进行测试， 获取id、token
+        # 真实项目会有接口文档，里面写好了每个接口的请求/返回格式，然后照着写测试代码
         resp = requests.post(f"{self.base_url}/register",json=register_payload)
         assert resp.status_code == 200,f"注册失败:{resp.text}"
         user_data = resp.json()
-        user_id = user_data["id"]
+        user_id = user_data["id"]                            # 注册获得id
         assert user_data["username"] == self.username
 
         login_payload = {"username":self.username,"password":self.password}
         resp = requests.post(f"{self.base_url}/login",data=login_payload)
         assert resp.status_code == 200,f"登录失败:{resp.text}"
-        token = resp.json()["access_token"]
+        token = resp.json()["access_token"]                             # 登录获得access_token
         headers = {"Authorization":f"Bearer {token}"}
 
-        resp = requests.get(f"{self.base_url}/users/me",headers=headers)
+        resp = requests.get(f"{self.base_url}/users/me",headers=headers)    # me 当前登录的用户
         assert resp.status_code == 200
         me = resp.json()
         assert me["username"] == self.username
