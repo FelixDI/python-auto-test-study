@@ -30,6 +30,14 @@ PythonAutoTest/
 │   ├── 02_测试理论.md
 │   └── 03_补充.md
 ├── reports/
+│   ├── allure-results/
+│   │   ├── 13c5affd-308c-4b8e-bae2-4de3fab39436-attachment.txt
+│   │   ├── 2aea11b2-9545-45f8-be73-9826dc067a93-result.json
+│   │   ├── 46ac0c2c-94a9-4cd6-847f-7df5565e6b96-attachment.txt
+│   │   ├── a5cd66ee-226f-441f-8117-97d0ee830a7b-container.json
+│   │   ├── aecc7afc-db76-4703-acdd-b05f95284f34-result.json
+│   │   ├── bca6700f-4eb1-4cc7-a196-90d50b6f73b3-container.json
+│   │   └── c181e6af-2a96-479a-8f2f-bbe88ffd5da8-result.json
 │   ├── api_test_report.html
 │   ├── stage2_final_report.html
 │   └── test_report_20260515_204741.txt
@@ -53,8 +61,10 @@ PythonAutoTest/
 │   │       ├── runner.py
 │   │       └── utils.py
 │   ├── project_ecommerce/
+│   │   ├── conftest.py
 │   │   ├── test_db.py
-│   │   └── test_debug.py
+│   │   ├── test_debug.py
+│   │   └── test_with_allure.py
 │   ├── stage1_pytest_core/
 │   │   ├── data/
 │   │   │   └── test_cases.json
@@ -91,7 +101,7 @@ PythonAutoTest/
 ├── testgitpush.py
 └── update_tree.py
 
-16 directories, 50 files
+17 directories, 59 files
 ```
 <!-- PROJECT_STRUCTURE_END -->
 
@@ -107,5 +117,9 @@ PythonAutoTest/
      core python programing 书太厚太全面了跟着敲代码还是学了就忘。
      Python 基础语法回顾（面向自动化测试）目标复习自动化测试高频用到的 Python 语法。
 
-- 03 项目实战
+- 03 项目实战（接口+UI自动化测试）
+
+- 04 AI自动化测试
+     AI提效 opencode+deepseek v4 pro
+     playwright+langchain方向
 ```
