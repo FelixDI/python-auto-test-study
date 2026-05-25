@@ -20,7 +20,7 @@ def db_connection():
     # 如果在 Jenkins 环境里（JENKINS_URL 变量存在），用 Docker 服务名 "db"
     # 否则就是本地开发，用 "localhost"
     if os.environ.get("JENKINS_URL"):
-        host = "db"
+        host = "db"     # docker-compose 中的 mysql 服务名
     else:
         host = "localhost"
 
