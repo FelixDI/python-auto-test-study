@@ -38,7 +38,7 @@ def generate_tree() -> str:
         result = subprocess.run(
             [
                 "tree",
-                "-I", "__pycache__|*.pyc|.git|.idea|.DS_Store|venv|env|.venv|mysql_data|jenkins_home",
+                "-I", "__pycache__|*.pyc|.git|.idea|.DS_Store|venv|env|.venv|mysql_data|jenkins_home",   # 排除
                 "--dirsfirst",
                 "-F"
             ],
