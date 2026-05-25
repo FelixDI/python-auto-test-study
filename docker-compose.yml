@@ -1,0 +1,50 @@
+version: "3.9"
+
+services:
+  # 1. 数据库 (MySQL) —— 最先启动
+  db:
+    image: mysql:8.4
+    container_name: mysql-test
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root123      # root 密码
+      MYSQL_DATABASE: test_db           # 自动创建测试库
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./mysql_data:/var/lib/mysql     # 数据持久化
+    networks:
+      - test-network
+
+  # 2. 被测服务 (FastAPI) —— 依赖 MySQL
+  api:
+    build: ./src/stage2_api_test/server # Dockerfile 所在目录
+    image: api-image                    # 固定镜像名，避免自动生成 pythonautotest-api
+    container_name: fastapi
+    restart: always
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    networks:
+      - test-network
+
+  # 3. 自动化执行 (Jenkins)
+  jenkins:
+    image: jenkins/jenkins:lts
+    container_name: jenkins
+    restart: always
+    ports:
+      - "8080:8080"
+      - "50000:50000"
+    volumes:
+      - ./jenkins_home:/var/jenkins_home # Jenkins 配置持久化
+      - /var/run/docker.sock:/var/run/docker.sock  # 允许 Jenkins 调用 Docker
+    depends_on:
+      - db
+    networks:
+      - test-network
+
+networks:
+  test-network:
+    driver: bridge
