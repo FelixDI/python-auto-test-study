@@ -1,1 +1,0 @@
-[{'id': 1, 'name': 'iPhone 15', 'price': Decimal('5999.00'), 'stock': 95}, {'id': 2, 'name': 'MacBook Pro', 'price': Decimal('12999.00'), 'stock': 50}]

@@ -223,3 +223,6 @@ jenkins_home/
 
 reports/allure-results/
 reports/allure-report/
+
+.DS_Store
+.idea/
