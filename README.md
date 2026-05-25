@@ -54,7 +54,7 @@ PythonAutoTest/
 │   │       └── utils.py
 │   ├── project_ecommerce/
 │   │   ├── conftest.py
-│   │   ├── test_db.py
+│   │   ├── db_example.py
 │   │   └── test_with_allure.py
 │   ├── stage1_pytest_core/
 │   │   ├── data/

@@ -3,10 +3,10 @@
 # @Time        : 2026-05-25 09:12
 # @Author      : Felix Cui
 # @Email       : cuihediyzu@gmail.com
-# @File        : test_db.py
+# @File        : db_example.py
 # @PythonEnv   : Python 3.12 (pythonautotest-py312)
 # @IDE         : PyCharm
-# @Description : practice mysql
+# @Description : 学习 pymysql 时的练习脚本，db_example.py，避免被 pytest 收集测试
 
 import pymysql
 
