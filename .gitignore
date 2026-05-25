@@ -220,3 +220,6 @@ __marimo__/
 
 mysql_data/
 jenkins_home/
+
+reports/allure-results/
+reports/allure-report/

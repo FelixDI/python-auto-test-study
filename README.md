@@ -30,6 +30,60 @@ PythonAutoTest/
 │   ├── 02_测试理论.md
 │   └── 03_补充.md
 ├── reports/
+│   ├── allure-report/
+│   │   ├── data/
+│   │   │   ├── attachments/
+│   │   │   │   ├── 2ef4b87a206228aa.txt
+│   │   │   │   └── ff9599da32e582c6.txt
+│   │   │   ├── test-cases/
+│   │   │   │   ├── 5176c76f874291d0.json
+│   │   │   │   ├── 9825a9eb1cd98777.json
+│   │   │   │   └── e6586694188db6e3.json
+│   │   │   ├── behaviors.csv
+│   │   │   ├── behaviors.json
+│   │   │   ├── categories.csv
+│   │   │   ├── categories.json
+│   │   │   ├── packages.json
+│   │   │   ├── suites.csv
+│   │   │   ├── suites.json
+│   │   │   └── timeline.json
+│   │   ├── export/
+│   │   │   ├── influxDbData.txt
+│   │   │   ├── mail.html
+│   │   │   └── prometheusData.txt
+│   │   ├── history/
+│   │   │   ├── categories-trend.json
+│   │   │   ├── duration-trend.json
+│   │   │   ├── history-trend.json
+│   │   │   ├── history.json
+│   │   │   └── retry-trend.json
+│   │   ├── plugin/
+│   │   │   ├── behaviors/
+│   │   │   │   └── index.js
+│   │   │   ├── packages/
+│   │   │   │   └── index.js
+│   │   │   └── screen-diff/
+│   │   │       ├── index.js
+│   │   │       └── styles.css
+│   │   ├── widgets/
+│   │   │   ├── behaviors.json
+│   │   │   ├── categories-trend.json
+│   │   │   ├── categories.json
+│   │   │   ├── duration-trend.json
+│   │   │   ├── duration.json
+│   │   │   ├── environment.json
+│   │   │   ├── executors.json
+│   │   │   ├── history-trend.json
+│   │   │   ├── launch.json
+│   │   │   ├── retry-trend.json
+│   │   │   ├── severity.json
+│   │   │   ├── status-chart.json
+│   │   │   ├── suites.json
+│   │   │   └── summary.json
+│   │   ├── app.js
+│   │   ├── favicon.ico
+│   │   ├── index.html
+│   │   └── styles.css
 │   ├── allure-results/
 │   │   ├── 13c5affd-308c-4b8e-bae2-4de3fab39436-attachment.txt
 │   │   ├── 2aea11b2-9545-45f8-be73-9826dc067a93-result.json
@@ -100,7 +154,7 @@ PythonAutoTest/
 ├── testgitpush.py
 └── update_tree.py
 
-17 directories, 58 files
+28 directories, 101 files
 ```
 <!-- PROJECT_STRUCTURE_END -->
 
