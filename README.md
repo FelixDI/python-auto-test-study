@@ -30,68 +30,6 @@ PythonAutoTest/
 │   ├── 02_测试理论.md
 │   └── 03_补充.md
 ├── reports/
-│   ├── allure-report/
-│   │   ├── data/
-│   │   │   ├── attachments/
-│   │   │   │   ├── 2ef4b87a206228aa.txt
-│   │   │   │   └── ff9599da32e582c6.txt
-│   │   │   ├── test-cases/
-│   │   │   │   ├── 5176c76f874291d0.json
-│   │   │   │   ├── 9825a9eb1cd98777.json
-│   │   │   │   └── e6586694188db6e3.json
-│   │   │   ├── behaviors.csv
-│   │   │   ├── behaviors.json
-│   │   │   ├── categories.csv
-│   │   │   ├── categories.json
-│   │   │   ├── packages.json
-│   │   │   ├── suites.csv
-│   │   │   ├── suites.json
-│   │   │   └── timeline.json
-│   │   ├── export/
-│   │   │   ├── influxDbData.txt
-│   │   │   ├── mail.html
-│   │   │   └── prometheusData.txt
-│   │   ├── history/
-│   │   │   ├── categories-trend.json
-│   │   │   ├── duration-trend.json
-│   │   │   ├── history-trend.json
-│   │   │   ├── history.json
-│   │   │   └── retry-trend.json
-│   │   ├── plugin/
-│   │   │   ├── behaviors/
-│   │   │   │   └── index.js
-│   │   │   ├── packages/
-│   │   │   │   └── index.js
-│   │   │   └── screen-diff/
-│   │   │       ├── index.js
-│   │   │       └── styles.css
-│   │   ├── widgets/
-│   │   │   ├── behaviors.json
-│   │   │   ├── categories-trend.json
-│   │   │   ├── categories.json
-│   │   │   ├── duration-trend.json
-│   │   │   ├── duration.json
-│   │   │   ├── environment.json
-│   │   │   ├── executors.json
-│   │   │   ├── history-trend.json
-│   │   │   ├── launch.json
-│   │   │   ├── retry-trend.json
-│   │   │   ├── severity.json
-│   │   │   ├── status-chart.json
-│   │   │   ├── suites.json
-│   │   │   └── summary.json
-│   │   ├── app.js
-│   │   ├── favicon.ico
-│   │   ├── index.html
-│   │   └── styles.css
-│   ├── allure-results/
-│   │   ├── 13c5affd-308c-4b8e-bae2-4de3fab39436-attachment.txt
-│   │   ├── 2aea11b2-9545-45f8-be73-9826dc067a93-result.json
-│   │   ├── 46ac0c2c-94a9-4cd6-847f-7df5565e6b96-attachment.txt
-│   │   ├── a5cd66ee-226f-441f-8117-97d0ee830a7b-container.json
-│   │   ├── aecc7afc-db76-4703-acdd-b05f95284f34-result.json
-│   │   ├── bca6700f-4eb1-4cc7-a196-90d50b6f73b3-container.json
-│   │   └── c181e6af-2a96-479a-8f2f-bbe88ffd5da8-result.json
 │   ├── api_test_report.html
 │   ├── stage2_final_report.html
 │   └── test_report_20260515_204741.txt
@@ -154,7 +92,7 @@ PythonAutoTest/
 ├── testgitpush.py
 └── update_tree.py
 
-28 directories, 101 files
+16 directories, 51 files
 ```
 <!-- PROJECT_STRUCTURE_END -->
 
