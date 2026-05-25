@@ -1,3 +1,10 @@
-packaging @ file:///home/conda/feedstock_root/build_artifacts/bld/rattler-build_packaging_1777103621/work
+
 setuptools==82.0.1
 wheel==0.47.0
+allure-pytest==2.16.0
+allure-python-commons==2.16.0
+pytest==9.0.3
+pytest-html==4.2.0
+pytest-metadata==3.1.1
+requests==2.34.2
+pymysql==1.2.0

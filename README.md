@@ -111,6 +111,6 @@ PythonAutoTest/
 - 03 项目实战（接口+UI自动化测试）
 
 - 04 AI自动化测试
-     AI提效 opencode+deepseek v4 pro
+     AI提效 opencode+DeepSeek v4pro
      playwright+langchain方向
 ```
