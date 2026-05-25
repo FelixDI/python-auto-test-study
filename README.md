@@ -63,7 +63,6 @@ PythonAutoTest/
 │   ├── project_ecommerce/
 │   │   ├── conftest.py
 │   │   ├── test_db.py
-│   │   ├── test_debug.py
 │   │   └── test_with_allure.py
 │   ├── stage1_pytest_core/
 │   │   ├── data/
@@ -101,7 +100,7 @@ PythonAutoTest/
 ├── testgitpush.py
 └── update_tree.py
 
-17 directories, 59 files
+17 directories, 58 files
 ```
 <!-- PROJECT_STRUCTURE_END -->
 
