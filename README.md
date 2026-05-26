@@ -68,8 +68,8 @@ PythonAutoTest/
 │   │       ├── test_basic.py
 │   │       ├── test_fixture.py
 │   │       ├── test_markers.py
-│   │       ├── test_mock.py
 │   │       ├── test_mock_external.py
+│   │       ├── test_mock.py
 │   │       ├── test_parametrize.py
 │   │       ├── test_unittest_demo.py
 │   │       └── test_user_api.py
@@ -82,16 +82,16 @@ PythonAutoTest/
 │       │   └── requirements.txt
 │       └── test_cases/
 │           ├── conftest.py
-│           ├── test_auth.py
 │           ├── test_auth_fixture.py
+│           ├── test_auth.py
 │           ├── test_integration.py
 │           ├── test_mock_external.py
 │           ├── test_param_auth.py
 │           ├── test_schema.py
 │           └── test_users_crud.py
-├── README.md
 ├── docker-compose.yml
 ├── pytest.ini
+├── README.md
 ├── requirements.txt
 ├── testgitpush.py
 └── update_tree.py
