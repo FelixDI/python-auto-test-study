@@ -112,8 +112,7 @@ PythonAutoTest/
      core python programing 书太厚太全面了跟着敲代码还是学了就忘。
      Python 基础语法回顾（面向自动化测试）目标复习自动化测试高频用到的 Python 语法。
 
-- 03 电商接口测试项目实战
-https://felixdi.github.io/python-auto-test-study/reports/allure-report/
+- 03 电商接口测试项目实战 ✅
 
 - 04 UI自动化测试 playwright selenium
 
@@ -124,4 +123,4 @@ https://felixdi.github.io/python-auto-test-study/reports/allure-report/
 
 ## 测试报告
 
-[查看 Allure 报告](https://felixdi.github.io/python-auto-test-study/reports/allure-report/)
+[电商 Allure 报告](https://felixdi.github.io/python-auto-test-study/reports/allure-report/)
