@@ -68,8 +68,8 @@ PythonAutoTest/
 │   │       ├── test_basic.py
 │   │       ├── test_fixture.py
 │   │       ├── test_markers.py
-│   │       ├── test_mock.py
 │   │       ├── test_mock_external.py
+│   │       ├── test_mock.py
 │   │       ├── test_parametrize.py
 │   │       ├── test_unittest_demo.py
 │   │       └── test_user_api.py
@@ -82,16 +82,16 @@ PythonAutoTest/
 │       │   └── requirements.txt
 │       └── test_cases/
 │           ├── conftest.py
-│           ├── test_auth.py
 │           ├── test_auth_fixture.py
+│           ├── test_auth.py
 │           ├── test_integration.py
 │           ├── test_mock_external.py
 │           ├── test_param_auth.py
 │           ├── test_schema.py
 │           └── test_users_crud.py
-├── README.md
 ├── docker-compose.yml
 ├── pytest.ini
+├── README.md
 ├── requirements.txt
 ├── testgitpush.py
 └── update_tree.py
@@ -112,9 +112,16 @@ PythonAutoTest/
      core python programing 书太厚太全面了跟着敲代码还是学了就忘。
      Python 基础语法回顾（面向自动化测试）目标复习自动化测试高频用到的 Python 语法。
 
-- 03 项目实战（接口+UI自动化测试）
+- 03 电商接口测试项目实战
+https://felixdi.github.io/python-auto-test-study/reports/allure-report/
 
-- 04 AI自动化测试
+- 04 UI自动化测试 playwright selenium
+
+- 05 AI自动化测试
      AI提效 opencode+DeepSeek v4pro
      playwright+langchain方向
 ```
+
+## 测试报告
+
+[查看 Allure 报告](https://felixdi.github.io/python-auto-test-study/reports/allure-report/)
