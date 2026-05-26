@@ -39,8 +39,14 @@ def db_connection():
 
 # 测试用例需要调用 FastAPI 接口   pytest测试用例自动获取夹具base_url
 
+# @pytest.fixture(scope="module")
+# def base_url():
+#     return "http://localhost:8000"
+
 @pytest.fixture(scope="module")
 def base_url():
+    if os.environ.get("JENKINS_URL"):
+        return "http://api:8000"  # Docker Compose 中 FastAPI 服务名
     return "http://localhost:8000"
 
 @pytest.fixture(scope="module")
