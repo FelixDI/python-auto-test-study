@@ -30,6 +30,10 @@ PythonAutoTest/
 │   ├── 02_测试理论.md
 │   └── 03_补充.md
 ├── reports/
+│   ├── playwright/
+│   │   ├── saucedemo_after_login.png
+│   │   ├── saucedemo_homepage.png
+│   │   └── saucedemo_products.png
 │   ├── api_test_report.html
 │   ├── stage2_final_report.html
 │   └── test_report_20260515_204741.txt
@@ -68,35 +72,39 @@ PythonAutoTest/
 │   │       ├── test_basic.py
 │   │       ├── test_fixture.py
 │   │       ├── test_markers.py
-│   │       ├── test_mock.py
 │   │       ├── test_mock_external.py
+│   │       ├── test_mock.py
 │   │       ├── test_parametrize.py
 │   │       ├── test_unittest_demo.py
 │   │       └── test_user_api.py
-│   └── stage2_api_test/
-│       ├── data/
-│       ├── server/
-│       │   ├── app/
-│       │   │   └── main.py
-│       │   ├── Dockerfile
-│       │   └── requirements.txt
-│       └── test_cases/
-│           ├── conftest.py
-│           ├── test_auth.py
-│           ├── test_auth_fixture.py
-│           ├── test_integration.py
-│           ├── test_mock_external.py
-│           ├── test_param_auth.py
-│           ├── test_schema.py
-│           └── test_users_crud.py
-├── README.md
+│   ├── stage2_api_test/
+│   │   ├── data/
+│   │   ├── server/
+│   │   │   ├── app/
+│   │   │   │   └── main.py
+│   │   │   ├── Dockerfile
+│   │   │   └── requirements.txt
+│   │   └── test_cases/
+│   │       ├── conftest.py
+│   │       ├── test_auth_fixture.py
+│   │       ├── test_auth.py
+│   │       ├── test_integration.py
+│   │       ├── test_mock_external.py
+│   │       ├── test_param_auth.py
+│   │       ├── test_schema.py
+│   │       └── test_users_crud.py
+│   └── stage3_ui_test/
+│       ├── test_saucedemo_assert.py
+│       ├── test_saucedemo_login.py
+│       └── test_saucedemo.py
 ├── docker-compose.yml
 ├── pytest.ini
+├── README.md
 ├── requirements.txt
 ├── testgitpush.py
 └── update_tree.py
 
-16 directories, 55 files
+18 directories, 61 files
 ```
 <!-- PROJECT_STRUCTURE_END -->
 
@@ -113,6 +121,7 @@ PythonAutoTest/
      Python 基础语法回顾（面向自动化测试）目标复习自动化测试高频用到的 Python 语法。
 
 - 03 电商接口测试项目实战 ✅
+     pytest + requests + pymysql + Allure + Jenkins + Docker
 
 - 04 UI自动化测试 playwright selenium
 
