@@ -18,7 +18,7 @@ flowchart LR
 
 
 # Python 自动化测试学习
-  最终目标：电商实战自动化测试项目 (pytest+requests+playwright)
+  最终目标：接口测试、UI测试、AI提效
 
 ## 目录结构
 
@@ -33,6 +33,7 @@ PythonAutoTest/
 │   ├── playwright/
 │   │   ├── saucedemo_after_login.png
 │   │   ├── saucedemo_homepage.png
+│   │   ├── saucedemo_order_complete.png
 │   │   └── saucedemo_products.png
 │   ├── api_test_report.html
 │   ├── stage2_final_report.html
@@ -94,7 +95,9 @@ PythonAutoTest/
 │   │       ├── test_schema.py
 │   │       └── test_users_crud.py
 │   └── stage3_ui_test/
+│       ├── conftest.py
 │       ├── test_saucedemo_assert.py
+│       ├── test_saucedemo_flow.py
 │       ├── test_saucedemo_login.py
 │       └── test_saucedemo.py
 ├── docker-compose.yml
@@ -104,7 +107,7 @@ PythonAutoTest/
 ├── testgitpush.py
 └── update_tree.py
 
-18 directories, 61 files
+18 directories, 64 files
 ```
 <!-- PROJECT_STRUCTURE_END -->
 
