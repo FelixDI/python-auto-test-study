@@ -40,23 +40,24 @@ PythonAutoTest/
 │   └── test_report_20260515_204741.txt
 ├── src/
 │   ├── exercises/
-│   │   └── pythonreview/
-│   │       ├── data/
-│   │       │   ├── config.json
-│   │       │   ├── sample.txt
-│   │       │   ├── test_cases.json
-│   │       │   └── test_data.csv
-│   │       ├── 01_variables.py
-│   │       ├── 02_datastructure.py
-│   │       ├── 03_controlflow.py
-│   │       ├── 04_functions.py
-│   │       ├── 05_OOPaboutclass.py
-│   │       ├── combine123_testdataprocess.py
-│   │       ├── combine123_testreports.py
-│   │       ├── combine45_classBaseTest.py
-│   │       ├── combine45_runtestcase.py
-│   │       ├── runner.py
-│   │       └── utils.py
+│   │   ├── pythonreview/
+│   │   │   ├── data/
+│   │   │   │   ├── config.json
+│   │   │   │   ├── sample.txt
+│   │   │   │   ├── test_cases.json
+│   │   │   │   └── test_data.csv
+│   │   │   ├── 01_variables.py
+│   │   │   ├── 02_datastructure.py
+│   │   │   ├── 03_controlflow.py
+│   │   │   ├── 04_functions.py
+│   │   │   ├── 05_OOPaboutclass.py
+│   │   │   ├── combine123_testdataprocess.py
+│   │   │   ├── combine123_testreports.py
+│   │   │   ├── combine45_classBaseTest.py
+│   │   │   ├── combine45_runtestcase.py
+│   │   │   ├── runner.py
+│   │   │   └── utils.py
+│   │   └── stage4_ai_test/
 │   ├── project_ecommerce/
 │   │   ├── conftest.py
 │   │   ├── db_example.py
@@ -96,10 +97,12 @@ PythonAutoTest/
 │   │       └── test_users_crud.py
 │   └── stage3_ui_test/
 │       ├── conftest.py
+│       ├── test_ai_generated.py
 │       ├── test_saucedemo_assert.py
 │       ├── test_saucedemo_flow.py
 │       ├── test_saucedemo_login.py
-│       └── test_saucedemo.py
+│       ├── test_saucedemo.py
+│       └── testcases_ai_generated.md
 ├── docker-compose.yml
 ├── pytest.ini
 ├── README.md
@@ -107,7 +110,7 @@ PythonAutoTest/
 ├── testgitpush.py
 └── update_tree.py
 
-18 directories, 64 files
+19 directories, 66 files
 ```
 <!-- PROJECT_STRUCTURE_END -->
 
