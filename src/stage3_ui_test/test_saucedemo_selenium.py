@@ -13,6 +13,7 @@
 
 # 2. 浏览器上下文
 # Playwright 的 browser.new_context() 可以创建独立的浏览器 session，互不干扰。Selenium 没有原生支持，需要手动管理 Cookie。
+# 用 Playwright 的 Browser Context 机制来做多用户隔离测试，同时进行，不需要手动管理登录状态，从根本上避免了串号和 Cookie 污染的问题
 
 # 3. 速度
 # Playwright 基于 Chrome DevTools Protocol（CDP），比 Selenium 的 HTTP 请求方式更快。
@@ -39,7 +40,7 @@ def test_login_and_product_count(driver):
     driver.find_element(By.CSS_SELECTOR,"[placeholder='Username']").send_keys("standard_user")
     driver.find_element(By.CSS_SELECTOR,"[placeholder='Password']").send_keys("secret_sauce")
     driver.find_element(By.CSS_SELECTOR,"#login-button").click()
-
+# 最多等待10秒  业内通常设置10～30秒
     WebDriverWait(driver,10).until(
         EC.presence_of_element_located((By.CLASS_NAME,"title"))
     )
