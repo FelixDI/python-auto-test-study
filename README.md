@@ -97,6 +97,7 @@ PythonAutoTest/
 │   └── stage3_ui_test/
 │       ├── conftest.py
 │       ├── test_ai_generated.py
+│       ├── test_saucedemo_allure.py
 │       ├── test_saucedemo_assert.py
 │       ├── test_saucedemo_flow.py
 │       ├── test_saucedemo_login.py
@@ -110,7 +111,7 @@ PythonAutoTest/
 ├── testgitpush.py
 └── update_tree.py
 
-18 directories, 67 files
+18 directories, 68 files
 ```
 <!-- PROJECT_STRUCTURE_END -->
 
@@ -129,11 +130,35 @@ PythonAutoTest/
 - 03 电商接口测试项目实战 ✅
      pytest + requests + pymysql + Allure + Jenkins + Docker
 
-- 04 UI自动化测试 playwright selenium
+- 04 UI自动化测试 playwright selenium  ✅
 
 - 05 AI自动化测试
-     AI提效 opencode+DeepSeek v4pro
-     playwright+langchain方向
+     AI提效 dify+DeepSeekv4pro 
+     创建工作流,设计测试用例、生成测试代码  ✅
+     
+     AI测试智能体：
+     Hermes自我进化优势突出，但目前尚不稳定 不能落地企业场景
+     
+     手动搭建可控智能体架构
+     LangGraph
+        ↓
+     控制Agent流程
+
+     LangChain
+        ↓
+     调用LLM/RAG/Tool Skill（本质就是@tool python代码）
+
+     Playwright
+        ↓
+     操作浏览器
+    
+     pytest
+        ↓
+     执行测试
+    
+       MCP （代码实现MCP服务器 大脑和手之间的“通用翻译官”和“连接中枢”）
+        ↓
+     连接外部工具
 ```
 
 ## 测试报告

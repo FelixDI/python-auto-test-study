@@ -10,6 +10,7 @@
 
 import pytest
 from playwright.sync_api import sync_playwright,Page
+import allure
 
 @pytest.fixture
 def browser():
@@ -36,6 +37,28 @@ def logged_in_page(page):
 # .title 是 SauceDemo 商品页面标题“Products”的 CSS 类名。这个显式等待能确保后续操作（比如断言商品数量）在正确的页面上执行。
     page.wait_for_selector(".title")
     return page
+
+
+@pytest.hookimpl(tryfirst=True,hookwrapper=True)
+def pytest_runtest_makereport(item,call):                  # Hook 的名字是 pytest 官方预定义好的，类似接口名称
+    outcome = yield
+    report = outcome.get_result()
+
+    if report.when == "call" and report.failed:
+        page = item.funcargs.get("page") or item.funcargs.get("logged_in_page")
+        if page:
+            screenshot = page.screenshot()
+
+            allure.attach(
+                screenshot,
+                name = f"失败截图-{item.name}",
+                attachment_type = allure.attachment_type.PNG
+            )
+
+
+
+
+
 
 # # conftest.py
 # import pytest
@@ -70,3 +93,27 @@ def logged_in_page(page):
 #     # 等待登录成功后页面标题出现
 #     page.wait_for_selector(".title")
 #     return page
+
+
+# # ========== 核心：失败自动截图 ==========
+# @pytest.hookimpl(tryfirst=True, hookwrapper=True)
+# def pytest_runtest_makereport(item, call):
+#     """
+#     每个用例执行结束后触发。
+#     如果是执行阶段(call)且失败了，自动截图并附加到 Allure 报告。
+#     """
+#     outcome = yield
+#     report = outcome.get_result()
+#
+#     if report.when == "call" and report.failed:
+#         # 从 fixture 中获取 page 对象
+#         page = item.funcargs.get("page") or item.funcargs.get("logged_in_page")
+#         if page:
+#             # 截图
+#             screenshot = page.screenshot()
+#             # 附加到 Allure 报告
+#             allure.attach(
+#                 screenshot,
+#                 name=f"失败截图 - {item.name}",
+#                 attachment_type=allure.attachment_type.PNG
+#             )
