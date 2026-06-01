@@ -65,6 +65,13 @@ PythonAutoTest/
 │   │   ├── test_orders.py
 │   │   ├── test_products.py
 │   │   └── test_with_allure.py
+│   ├── saucedemo_ui_test/
+│   │   ├── common/
+│   │   │   └── base_page.py
+│   │   ├── pages/
+│   │   │   └── login_page.py
+│   │   ├── testcases/
+│   │   └── conftest.py
 │   ├── stage1_pytest_core/
 │   │   ├── data/
 │   │   │   └── test_cases.json
@@ -111,7 +118,7 @@ PythonAutoTest/
 ├── testgitpush.py
 └── update_tree.py
 
-18 directories, 68 files
+22 directories, 71 files
 ```
 <!-- PROJECT_STRUCTURE_END -->
 
@@ -163,4 +170,4 @@ PythonAutoTest/
 
 ## 测试报告
 
-[电商 Allure 报告](https://felixdi.github.io/python-auto-test-study/reports/allure-report/)
+[电商 Allure 接口测试报告](https://felixdi.github.io/python-auto-test-study/reports/allure-report/)
