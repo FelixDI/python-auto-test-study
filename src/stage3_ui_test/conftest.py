@@ -22,7 +22,7 @@ def browser():
 
 @pytest.fixture
 def page(browser):
-    context = browser.new_context()   # 浏览器上下文
+    context = browser.new_context()   # 浏览器上下文 一个浏览器进程里，模拟多个互相隔离的真实用户 同时测试
     page = context.new_page()
     yield page
 
