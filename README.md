@@ -69,8 +69,10 @@ PythonAutoTest/
 │   │   ├── common/
 │   │   │   └── base_page.py
 │   │   ├── pages/
-│   │   │   └── login_page.py
+│   │   │   ├── login_page.py
+│   │   │   └── products_page.py
 │   │   ├── testcases/
+│   │   │   └── test_login.py
 │   │   └── conftest.py
 │   ├── stage1_pytest_core/
 │   │   ├── data/
@@ -118,7 +120,7 @@ PythonAutoTest/
 ├── testgitpush.py
 └── update_tree.py
 
-22 directories, 71 files
+22 directories, 73 files
 ```
 <!-- PROJECT_STRUCTURE_END -->
 

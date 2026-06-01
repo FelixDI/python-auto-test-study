@@ -40,7 +40,7 @@ def logged_in_page(page):
 
 
 @pytest.hookimpl(tryfirst=True,hookwrapper=True)
-def pytest_runtest_makereport(item,call):                  # Hook 的名字是 pytest 官方预定义好的，类似接口名称
+def pytest_runtest_makereport(item,call):  # pytest_runtest_makereport(item,call)是 pytest 官方预定义好的Hook签名
     outcome = yield
     report = outcome.get_result()
 
