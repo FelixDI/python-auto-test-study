@@ -68,11 +68,18 @@ PythonAutoTest/
 │   ├── saucedemo_ui_test/
 │   │   ├── common/
 │   │   │   └── base_page.py
+│   │   ├── data/
+│   │   │   └── users.json
 │   │   ├── pages/
+│   │   │   ├── cart_page.py
+│   │   │   ├── checkout_page.py
 │   │   │   ├── login_page.py
 │   │   │   └── products_page.py
 │   │   ├── testcases/
-│   │   │   └── test_login.py
+│   │   │   ├── test_cart.py
+│   │   │   ├── test_checkout.py
+│   │   │   ├── test_login.py
+│   │   │   └── test_products.py
 │   │   └── conftest.py
 │   ├── stage1_pytest_core/
 │   │   ├── data/
@@ -120,7 +127,7 @@ PythonAutoTest/
 ├── testgitpush.py
 └── update_tree.py
 
-22 directories, 73 files
+23 directories, 79 files
 ```
 <!-- PROJECT_STRUCTURE_END -->
 
