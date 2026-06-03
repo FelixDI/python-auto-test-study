@@ -13,6 +13,7 @@ import pytest
 
 
 @pytest.mark.smoke
+@pytest.mark.parametrize("logged_in_user", ["standard_user"], indirect=True)
 @pytest.mark.usefixtures("logged_in_user")
 def test_complete_order(products_page, cart_page, checkout_page):
     products_page.add_product_to_cart()

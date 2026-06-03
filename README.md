@@ -137,7 +137,7 @@ PythonAutoTest/
 ```
 - 01 环境搭建完成 ✅
      miniforge+pycharm+git+github
-     docker desktop(fastapi+mysql+jenkins)
+     docker desktop(fastapi+mysql+Jenkins)
      
 - 02 Python 基础学习 ✅
      core python programing 书太厚太全面了跟着敲代码还是学了就忘。
@@ -146,7 +146,8 @@ PythonAutoTest/
 - 03 电商接口测试项目实战 ✅
      pytest + requests + pymysql + Allure + Jenkins + Docker
 
-- 04 UI自动化测试 playwright selenium  ✅
+- 04 SauceDemo项目实战UI自动化测试 ✅
+     playwright实战 selenium稍做了解
 
 - 05 AI自动化测试
      AI提效 dify+DeepSeekv4pro 

@@ -13,12 +13,14 @@ import pytest
 
 
 # 执行登录 但不需要 fixture 返回值
+@pytest.mark.parametrize("logged_in_user", ["standard_user"], indirect=True)
 @pytest.mark.usefixtures("logged_in_user")
 def test_add_product_to_cart(products_page):
     products_page.add_product_to_cart()
     assert products_page.get_cart_item_count() == 1
 
 
+@pytest.mark.parametrize("logged_in_user", ["standard_user"], indirect=True)
 @pytest.mark.usefixtures("logged_in_user")
 def test_go_to_cart(products_page, cart_page):
     products_page.go_to_cart()

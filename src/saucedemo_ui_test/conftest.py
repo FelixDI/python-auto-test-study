@@ -12,12 +12,24 @@
 """pytest自动访问夹具,统一管理登录、商品、购物车、结账页面对象的实例，供测试文件使用，进行测试"""
 
 import pytest
+import json
+import os
+import allure
 
 from playwright.sync_api import Page
 from src.saucedemo_ui_test.pages.login_page import LoginPage
 from src.saucedemo_ui_test.pages.products_page import ProductsPage
 from src.saucedemo_ui_test.pages.cart_page import CartPage
 from src.saucedemo_ui_test.pages.checkout_page import CheckoutPage
+
+
+# 整个测试会话只执行一次 加载所有用户数据
+@pytest.fixture(scope="session")
+def all_users():
+    data_file = os.path.join(str(os.path.dirname(__file__)), "data", "users.json")
+    # 拼接路径/Users/felix/project/data/users.json  或者推荐用from pathlib import Path
+    with open(data_file, "r", encoding="utf-8") as f:
+        return json.load(f) # dict  返回 JSON 对应的 Python 对象  json格式决定 {} -> dict   [] -> list
 
 
 # pytest 会做以下事情：
@@ -46,14 +58,51 @@ def cart_page(page: Page) -> CartPage:
 def checkout_page(page: Page) -> CheckoutPage:
     return CheckoutPage(page)
 
+#
+# @pytest.fixture(scope="function")
+# def logged_in_user(page: Page, login_page: LoginPage, products_page: ProductsPage):
+#     login_page.navigate()
+#     login_page.login("standard_user", "secret_sauce")
+#     products_page.assert_page_loaded()
+#     yield
+    # page.context.clear_cookies()  # 测试结束，上下文清理。pytest-playwright Fixture 每个测试都会创建新的 Browser Context
 
+
+# 作为6种用户测试的接口  暂时不深入另外五种用户的测试用例
+#     "locked_out_user",
+#     "problem_user",
+#     "performance_glitch_user",
+#     "error_user",
+#     "visual_user"
 @pytest.fixture(scope="function")
-def logged_in_user(page: Page, login_page: LoginPage, products_page: ProductsPage):
+def logged_in_user(request, login_page, products_page, all_users):
+    # @pytest.mark.parametrize("logged_in_user", ["standard_user"], indirect=True)
+    username = request.param  # request是Pytest的内置Fixture,它包含当前测试上下文信息。 request.param=="standard_user"
+    user_data = all_users[username]
+
     login_page.navigate()
-    login_page.login("standard_user", "secret_sauce")
-    products_page.assert_page_loaded()
-    yield
-    page.context.clear_cookies()  # 测试结束，上下文清理。pytest-playwright Fixture 每个测试都会创建新的 Browser Context
+    login_page.login(user_data["username"], user_data["password"])
+    # users.json中的locked_out_user被排除
+    if user_data["expected"]["login_success"]:
+        products_page.assert_page_loaded()
+        yield
+
+
+# 失败自动截图钩子
+# pytest_runtest_makereport(item,call)是 pytest 官方预定义好的Hook函数签名 不能更改
+@pytest.hookimpl(tryfirst=True, hookwrapper=True)
+def pytest_runtest_makereport(item, call):
+    outcome = yield
+    report = outcome.get_result()
+    if report.when == "call" and report.failed:
+        page = item.funcargs.get("page") or item.funcargs.get("logged_in_user")
+        if page:
+            screenshot = page.screenshot()
+            allure.attach(
+                screenshot,
+                name=f"失败截图-{item.name}",
+                attachment_type=allure.attachment_type.PNG
+            )
 
 
 # # src/conftest.py

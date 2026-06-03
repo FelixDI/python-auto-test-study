@@ -12,6 +12,7 @@
 import pytest
 
 
+@pytest.mark.parametrize("logged_in_user", ["standard_user"], indirect=True)
 @pytest.mark.usefixtures("logged_in_user")
 def test_cart_item_count(products_page, cart_page):
     products_page.add_product_to_cart()
@@ -19,6 +20,7 @@ def test_cart_item_count(products_page, cart_page):
     assert cart_page.get_cart_items_count() == 1
 
 
+@pytest.mark.parametrize("logged_in_user", ["standard_user"], indirect=True)
 @pytest.mark.usefixtures("logged_in_user")
 def test_go_to_checkout(products_page, cart_page, checkout_page):
     products_page.go_to_cart()  # 夹具中logged_in_user只进行了登录成功进入商品页面 所以要增加一步 点击购物车

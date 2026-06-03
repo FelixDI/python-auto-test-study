@@ -15,10 +15,25 @@ import pytest
 
 
 @pytest.mark.smoke
-def test_successful_login(login_page, products_page):
+@pytest.mark.parametrize("username", [
+    "standard_user",
+    "locked_out_user",
+    "problem_user",
+    "performance_glitch_user",
+    "error_user",
+    "visual_user"
+])  # 按用户名遍历用户数据users.json
+def test_successful_login(all_users, username, login_page, products_page):
+    user_data = all_users[username]
+
     login_page.navigate()
-    login_page.login("standard_user", "secret_sauce")
-    products_page.assert_page_loaded()
+    login_page.login(user_data["username"], user_data["password"])
+
+    expected_success = user_data["expected"]["login_success"]
+    if expected_success:
+        products_page.assert_page_loaded()
+    else:
+        login_page.assert_text_contains(login_page.ERROR_MESSAGE, user_data["expected"]["error_message"])
 
 
 def test_invalid_username(login_page):

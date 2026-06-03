@@ -1,0 +1,52 @@
+{
+  "standard_user": {
+    "username": "standard_user",
+    "password": "secret_sauce",
+    "expected": {
+      "login_success": true,
+      "checkout_success": true
+    }
+  },
+  "locked_out_user": {
+    "username": "locked_out_user",
+    "password": "secret_sauce",
+    "expected": {
+      "login_success": false,
+      "error_message": "Epic sadface: Sorry, this user has been locked out."
+    }
+  },
+  "problem_user": {
+    "username": "problem_user",
+    "password": "secret_sauce",
+    "expected": {
+      "login_success": true,
+      "checkout_success": false
+    }
+  },
+  "performance_glitch_user": {
+    "username": "performance_glitch_user",
+    "password": "secret_sauce",
+    "expected": {
+      "login_success": true,
+      "checkout_success": true,
+      "load_time_threshold": 10000
+    }
+  },
+  "error_user": {
+    "username": "error_user",
+    "password": "secret_sauce",
+    "expected": {
+      "login_success": true,
+      "checkout_success": false,
+      "error_message": "Error: Order could not be completed"
+    }
+  },
+  "visual_user": {
+    "username": "visual_user",
+    "password": "secret_sauce",
+    "expected": {
+      "login_success": true,
+      "checkout_success": true
+    }
+  }
+}
