@@ -13,18 +13,30 @@ from src.saucedemo_ui_test.common.base_page import BasePage
 
 
 class CheckoutPage(BasePage):
+    PAGE_TITLE = "[data-test='title']"
     FIRST_NAME_INPUT = "#first-name"
     LAST_NAME_INPUT = "#last-name"
     ZIP_CODE_INPUT = "#postal-code"
     CONTINUE_BUTTON = "#continue"
+    ERROR_MESSAGE = "[data-test='error']"
     FINISH_BUTTON = "#finish"
     COMPLETE_HEADER = ".complete-header"
+
+    # def __init__(self, page):
+    #     super().__init__(page)
+    #     self.menu = MenuComponent(page)
+
+    def assert_page_loaded(self):
+        self.assert_text_contains(self.PAGE_TITLE, "Checkout: Your Information")
 
     def fill_shipping_info(self, first_name: str, last_name: str, zip_code: str):
         self.fill(self.FIRST_NAME_INPUT, first_name)
         self.fill(self.LAST_NAME_INPUT, last_name)
         self.fill(self.ZIP_CODE_INPUT, zip_code)
         self.click(self.CONTINUE_BUTTON)
+
+    # def assert_page_loaded(self):
+    #     self.assert_text_contains(self.PAGE_TITLE, "Checkout: Overview")
 
     def finish_order(self):
         self.click(self.FINISH_BUTTON)

@@ -12,13 +12,20 @@
 """cart页面访问验证、按钮功能定义"""
 
 from src.saucedemo_ui_test.common.base_page import BasePage
+from src.saucedemo_ui_test.pages.checkout_page import CheckoutPage
 
 
 class CartPage(BasePage):
     PAGE_TITLE = ".title"
     CART_ITEM = ".cart_item"
+    CART_ITEM_NAME = "[data-test='cart-item-name']"
+    REMOVE_BUTTON = "[data-test^='remove-']"
     CHECKOUT_BUTTON = "#checkout"
     CONTINUE_SHOPPING_BUTTON = "#continue-shopping"
+
+    # def __init__(self, page):
+    #     super().__init__(page)
+    #     self.menu = MenuComponent(page)
 
     # 高内聚低耦合：每个页面对象只负责自己的操作，不依赖其他页面  进入cart界面 实际上是products页面的按钮功能
     # cart_page这里只需要定义一个 验证方法assert_page_loaded 被实例调用

@@ -25,7 +25,8 @@
 
 """Page Object基类封装，登录、商品、购物车、结账四个页面对象，常用的通用方法定义"""
 
-from playwright.sync_api import Page, expect
+from playwright.sync_api import Page, expect, Locator
+from typing import Optional
 
 
 class BasePage:
@@ -35,13 +36,31 @@ class BasePage:
     # def __init__(self, playwright_page: Page):
         self.page = page  # Playwright框架提供的浏览器页面对象Page提供给基类直接使用封装好的大量函数goto()locator()fill()click()等等
         self.base_url = "https://www.saucedemo.com"
+        self._menu = None  #标记为 未创建该组件的状态
+    #
+    #
+    # saucedemo页面对象较少 手动__init__注入菜单组件对象尚且能够应付。数百个页面对象时就是灾难 而且不是所有页面对象都有该组件对象
+    # 最优的方式 应该采用函数调用方式 测试用例真正使用组件时page.menu，才会创建它，避免了不必要的资源消耗
+    # 还能避免页面对象、组件对象出现循环导入import
+    # property属性装饰器 把一个需要执行逻辑的方法伪装成普通属性访问 不需要page.menu()这样调用
+    @property
+    def menu(self):
+        if not self._menu:
+            from src.saucedemo_ui_test.components.menu_component import MenuComponent
+            self._menu = MenuComponent(self.page)
+        return self._menu
 
     def navigate(self, path: str = ""):
         self.page.goto(f"{self.base_url}{path}")
 
     # 元素定位器locator参数
-    def click(self, locator: str):
-        self.page.locator(locator).click()
+    # def click(self, locator: str):
+    #     self.page.locator(locator).click()
+    def click(self, locator: str | Locator):
+        if isinstance(locator, str):
+            self.page.locator(locator).click()
+        else:
+            locator.click()
 
     def fill(self, locator: str, value: str):
         self.page.locator(locator).fill(value)
@@ -51,6 +70,12 @@ class BasePage:
         text = self.page.locator(locator).text_content()
         return text.strip() if text is not None else ""
         # return text.strip() if text else ""
+
+    def get_attribute(self, locator: str, attribute: str = 'data-test') -> Optional[str]:
+        return self.page.locator(locator).get_attribute(attribute)  # 获取元素属性
+    # locator = "[data-test='add-to-cart-sauce-labs-backpack']"
+    # attribute = 'add-to-cart-sauce-labs-backpack'
+    # product_id = "sauce-labs-backpack"
 
     def is_visible(self, locator: str) -> bool:
         return self.page.locator(locator).is_visible()

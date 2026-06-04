@@ -22,6 +22,13 @@ def test_add_product_to_cart(products_page):
 
 @pytest.mark.parametrize("logged_in_user", ["standard_user"], indirect=True)
 @pytest.mark.usefixtures("logged_in_user")
+def test_add_all_products_to_cart(products_page):
+    products_page.add_all_products_to_cart()
+    assert products_page.get_cart_item_count() == 6
+
+
+@pytest.mark.parametrize("logged_in_user", ["standard_user"], indirect=True)
+@pytest.mark.usefixtures("logged_in_user")
 def test_go_to_cart(products_page, cart_page):
     products_page.go_to_cart()
     cart_page.assert_page_loaded()

@@ -85,7 +85,7 @@ def logged_in_user(request, login_page, products_page, all_users):
     # users.json中的locked_out_user被排除
     if user_data["expected"]["login_success"]:
         products_page.assert_page_loaded()
-        yield
+        yield products_page
 
 
 # 失败自动截图钩子
