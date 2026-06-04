@@ -142,3 +142,78 @@ def pytest_runtest_makereport(item, call):
 #     yield
 #     # 测试结束后清理
 #     page.context.clear_cookies()
+
+
+
+# import pytest
+# import json
+# import os
+#
+# from playwright.sync_api import Page
+#
+# from src.saucedemo_ui_test.pages.login_page import LoginPage
+# from src.saucedemo_ui_test.pages.products_page import ProductsPage
+#
+#
+# # =========================
+# # 1. 基础数据 Fixture
+# # =========================
+# @pytest.fixture(scope="session")
+# def all_users():
+#     data_file = os.path.join(
+#         os.path.dirname(__file__),
+#         "data",
+#         "users.json"
+#     )
+#     with open(data_file, "r", encoding="utf-8") as f:
+#         return json.load(f)
+#
+#
+# # =========================
+# # 2. Playwright 提供的 page（来自 pytest-playwright）
+# # =========================
+# @pytest.fixture(scope="function")
+# def base_page(page: Page):
+#     """
+#     统一入口：所有 Page Object 都基于同一个 page
+#     """
+#     return page
+#
+#
+# # =========================
+# # 3. Page Object：登录页
+# # =========================
+# @pytest.fixture(scope="function")
+# def login_page(base_page):
+#     return LoginPage(base_page)
+#
+#
+# # =========================
+# # 4. 登录状态（核心fixture）
+# #    👉 推荐只保留这个“业务态fixture”
+# # =========================
+# @pytest.fixture(scope="function")
+# def logged_in_user(request, login_page, all_users):
+#     username = request.param
+#     user_data = all_users[username]
+#
+#     login_page.navigate()
+#
+#     login_page.login(
+#         user_data["username"],
+#         user_data["password"]
+#     )
+#
+#     # 登录成功后直接构建 products_page
+#     products_page = ProductsPage(login_page.page)
+#     products_page.assert_page_loaded()
+#
+#     yield products_page
+#
+#
+# # =========================
+# # 5. 可选：关闭自动截图（如果你有hook）
+# # =========================
+# @pytest.fixture(scope="function", autouse=False)
+# def debug_mode():
+#     return False

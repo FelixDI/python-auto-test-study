@@ -48,11 +48,13 @@ class MenuComponent(BasePage):
         self.assert_element_visible(self.LOGOUT_LINK)
         self.assert_element_visible(self.RESET_APP_STATE_LINK)
 
+    # def click_all_items(self, products_page_class):  # 外部传入class 避免循环导入
     def click_all_items(self):
         self.open()
         self.click(self.ALL_ITEMS_LINK)
         self.is_open = False  # 实际上在products_page页面时 点击all items 菜单不关闭 与其他页面功能不一致
         return ProductsPage(self.page)
+        # return products_page_class(self.page)
 
     def click_about(self):
         self.open()

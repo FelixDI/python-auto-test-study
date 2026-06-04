@@ -150,7 +150,8 @@ PythonAutoTest/
      pytest + requests + pymysql + Allure + Jenkins + Docker
 
 - 04 SauceDemo项目实战UI自动化测试 ✅
-     playwright实战 selenium稍做了解
+     playwright实战 (POM + component object)
+     selenium稍做了解
 
 - 05 AI自动化测试
      AI提效 dify+DeepSeekv4pro 
