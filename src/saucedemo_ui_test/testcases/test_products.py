@@ -35,7 +35,7 @@ class TestProductsPage:  # 共同前置条件 类式写法
     def test_go_to_cart(self, logged_in_user):
         products_page = logged_in_user
         cart_page = products_page.go_to_cart()
-        cart_page.assert_page_loaded()
+        cart_page.assert_cart_page_loaded()
 
     def test_sort_by_price_low_to_high(self, logged_in_user):
         products_page = logged_in_user
