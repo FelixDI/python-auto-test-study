@@ -13,6 +13,7 @@
 
 from src.saucedemo_ui_test.common.base_page import BasePage
 from src.saucedemo_ui_test.pages.cart_page import CartPage
+from src.saucedemo_ui_test.components.menu_component import MenuComponent
 
 
 class ProductsPage(BasePage):
@@ -26,24 +27,49 @@ class ProductsPage(BasePage):
     PRODUCT_IMAGE = "[data-test='inventory-item-img']"
     PRODUCT_NAME = "[data-test='inventory-item-name']"
     PRODUCT_PRICE = "[data-test='inventory-item-price']"
-    ADD_TO_CART_BUTTONS = "[data-test^='add-to-cart-']"  # ^=表示以某个字符串开头（starts with）
+    ADD_TO_CART_BUTTONS = "[data-test^='add-to-cart-']"  # ^=表示以某个字符串开头（starts with） 前缀
     REMOVE_BUTTON = "[data-test^='remove-']"
     SORT_CONTAINER = "[data-test='product-sort-container']"
 
-    # def __init__(self, page):
-    #     super().__init__(page)
-    #     self.menu = MenuComponent(self.page)  # 注入菜单组件
+    def __init__(self, page):
+        super().__init__(page)
+        self.menu = MenuComponent(self.page)  # 注入菜单组件
 
     def assert_page_loaded(self):
         self.assert_text_contains(self.PAGE_TITLE, "Products")  # BasePage封装的类方法直接用
         self.assert_url_contains("/inventory.html")
 
+    # <img src="img1.jpg">
+    # <img src="img2.jpg">
+    # <img src="img3.jpg">
+    def get_all_product_images(self) -> list[str]:
+        images = self.page.locator(self.PRODUCT_IMAGE)
+        # return [image.get_attribute("src") for image in images]
+        return [images.nth(i).get_attribute("src") for i in range(images.count())]
+
+    # <div data-test="inventory-item">
+    #     <a data-test="inventory-item-name">Sauce Labs Backpack</a>
+    # </div>
+    #
+    # <div data-test="inventory-item">
+    #     <a data-test="inventory-item-name">Sauce Labs Bike Light</a>
+    # </div>
+    #
+    # <div data-test="inventory-item">
+    #     <a data-test="inventory-item-name">Sauce Labs Bolt T-Shirt</a>
+    # </div>
+    #
+    # ...
+    # Playwright 的 Locator 默认就是“匹配结果集合”，一个定位器可以同时匹配 1 个、6 个、100 个元素，不需要为每个商品单独写定位器。
+    def get_product_name_by_index(self, index: int) ->str:
+        return self.page.locator(self.PRODUCT_NAME).nth(index).text_content
+
     def add_product_by_index(self, index: int):
         """添加指定索引的商品到购物车"""
-        self.page.locator(self.ADD_TO_CART_BUTTONS).nth(index).click()
+        self.page.locator(self.ADD_TO_CART_BUTTONS).nth(index).click()  # nth(0～5)
 
     def add_all_products_to_cart(self):
-        buttons = self.page.locator(self.ADD_TO_CART_BUTTONS)  # locator对象 6个按钮组成的 Locator 集合
+        buttons = self.page.locator(self.ADD_TO_CART_BUTTONS)  # locator对象 6个商品按钮组成的 Locator 集合
         count = buttons.count()
 
         for _ in range(count):
@@ -61,6 +87,9 @@ class ProductsPage(BasePage):
     def add_product_to_cart(self, product_id: str = "sauce-labs-backpack"):
         self.click(f"[data-test='add-to-cart-{product_id}']")
 
+    def remove_product_by_index(self, index: int):
+        self.page.locator(self.REMOVE_BUTTON).nth(index).click()
+
     # def get_cart_item_count(self) -> int:
         # return int(self.get_text(self.CART_BADGE))
     def get_cart_item_count(self) -> int:
@@ -70,7 +99,7 @@ class ProductsPage(BasePage):
         return int(self.get_text(self.CART_BADGE))
 
     # 高内聚低耦合：每个页面对象只负责自己的操作，不依赖其他页面
-    def go_to_cart(self):
+    def go_to_cart(self) -> CartPage:
         self.click(self.CART_LINK)
         return CartPage(self.page)
 
