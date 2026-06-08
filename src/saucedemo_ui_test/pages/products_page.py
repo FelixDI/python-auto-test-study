@@ -68,12 +68,21 @@ class ProductsPage(BasePage):
         """添加指定索引的商品到购物车"""
         self.page.locator(self.ADD_TO_CART_BUTTONS).nth(index).click()  # nth(0～5)
 
+    # button Locator 集合是动态的，点击后 add-to-cart 按钮会变成 remove 按钮，导致集合长度变化，nth(i) 后面的索引失效，所以超时
     def add_all_products_to_cart(self):
-        buttons = self.page.locator(self.ADD_TO_CART_BUTTONS)  # locator对象 6个商品按钮组成的 Locator 集合
-        count = buttons.count()
+        # buttons = self.page.locator(self.ADD_TO_CART_BUTTONS)  # locator对象 6个商品按钮组成的 Locator 集合
+        # count = buttons.count()
 
-        for _ in range(count):
-            buttons.first.click()
+        # for _ in range(count):
+        #     buttons.first.click()
+
+        # 为了统一风格.nth 直接遍历商品卡片
+        items = self.page.locator(self.INVENTORY_ITEM)
+
+        for i in range(items.count()):
+            items.nth(i).locator("button").click()
+
+
 
     # 页面HTML源码
     # <button data-test="add-to-cart-sauce-labs-backpack">
