@@ -50,7 +50,7 @@ class CartPage(BasePage):
 
     def click_continue_shopping(self):
         self.click(self.CONTINUE_SHOPPING_BUTTON)
-        from src.saucedemo_ui_test.pages.products_page import ProductsPage  # 避免循环导入  采用延迟导入
+        from src.saucedemo_ui_test.pages.products_page import ProductsPage  # 避免循环导入  采用局部延迟导入
         return ProductsPage(self.page)
 
 
