@@ -1,5 +1,4 @@
-# .github/workflows/ui-test-allure.yml
-name: Sauce Demo UI自动化测试
+name: UI Tests and Allure Report
 
 on:
   push:
@@ -7,82 +6,37 @@ on:
   pull_request:
     branches: [ main ]
 
-# 部署GitHub Pages必需的权限
-permissions:
-  contents: read
-  pages: write
-  id-token: write
-
-# 确保同一时间只有一个部署在运行
-concurrency:
-  group: "pages"
-  cancel-in-progress: false
-
 jobs:
   test:
-    name: 执行UI测试并生成Allure报告
     runs-on: ubuntu-latest
-    timeout-minutes: 10
-
     steps:
-      - name: 检出代码
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: 设置Python 3.12.13
+      - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-          cache: 'pip'
 
-      - name: 安装依赖
+      - name: Install Dependencies
         run: |
-          python -m pip install --upgrade pip
           pip install -r requirements.txt
+          playwright install chromium --with-deps
 
-      - name: 安装Playwright浏览器
-        run: playwright install chromium --with-deps
-
-      - name: 运行测试生成Allure结果
+      - name: Run UI Tests
         run: |
-          export PYTHONPATH=$PYTHONPATH:$(pwd)/src
-          pytest src/saucedemo_ui_test/testcases/ \
+          pytest src/saucedemo_ui_test/testcases/ -v \
             --alluredir=allure-results \
-            --clean-alluredir \
-            -v
+            --headed=false
 
-      - name: 上传Allure结果
-        uses: actions/upload-artifact@v4
+      - name: Generate Allure Report
+        run: |
+          # 下载并安装 Allure 命令行工具
+          wget -O allure-2.33.0.tgz https://github.com/allure-framework/allure2/releases/download/2.33.0/allure-2.33.0.tgz
+          tar -xzf allure-2.33.0.tgz
+          ./allure-2.33.0/bin/allure generate allure-results -o allure-report --clean
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
         with:
-          name: allure-results
-          path: allure-results
-
-  deploy:
-    name: 部署Allure报告到GitHub Pages
-    needs: test
-    runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-
-    steps:
-      - name: 下载Allure结果
-        uses: actions/download-artifact@v4
-        with:
-          name: allure-results
-          path: allure-results
-
-      - name: 生成Allure报告
-        uses: simple-elf/allure-report-action@master
-        with:
-          allure_results: allure-results
-          allure_history: allure-history
-          keep_reports: 20  # 保留最近20次测试报告
-
-      - name: 配置GitHub Pages
-        uses: actions/configure-pages@v5
-
-      - name: 部署报告
-        id: deployment
-        uses: actions/deploy-pages@v4
-        with:
-          path: allure-history
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./allure-report
