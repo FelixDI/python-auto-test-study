@@ -7,6 +7,10 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
+    # 为 peaceiris/actions-gh-pages 提供写入权限
+    permissions:
+      contents: write
+
     steps:
       - name: 检出代码
         uses: actions/checkout@v4
@@ -22,10 +26,10 @@ jobs:
           playwright install chromium --with-deps
 
       - name: 运行 UI 测试
+        # 注意：不要在 GitHub Actions 中使用 --headed 参数，默认无头运行即可
         run: |
           pytest src/saucedemo_ui_test/testcases/ -v \
-            --alluredir=allure-results \
-            --headed=false
+            --alluredir=allure-results
 
       - name: 生成 Allure 报告
         run: |
