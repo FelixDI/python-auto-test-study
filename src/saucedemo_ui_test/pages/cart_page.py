@@ -10,7 +10,7 @@
 
 
 """cart页面访问验证、按钮功能定义"""
-
+from pages import checkout_page
 from src.saucedemo_ui_test.common.base_page import BasePage
 from src.saucedemo_ui_test.pages.checkout_page import CheckoutPage
 from src.saucedemo_ui_test.components.menu_component import MenuComponent
@@ -46,13 +46,20 @@ class CartPage(BasePage):
 
     def go_to_checkout(self) -> CheckoutPage:
         self.click(self.CHECKOUT_BUTTON)
-        return CheckoutPage(self.page)
+        step_one_page = CheckoutPage(self.page)
+        step_one_page.assert_page_loaded()
+        return step_one_page
 
     def click_continue_shopping(self):
         self.click(self.CONTINUE_SHOPPING_BUTTON)
         from src.saucedemo_ui_test.pages.products_page import ProductsPage  # 避免循环导入  采用局部延迟导入
         return ProductsPage(self.page)
 
+    def remove_product_by_index(self, index: int):
+        self.page.locator(self.REMOVE_BUTTON).nth(index).click()
+
+    def get_cart_item_count(self) -> int:
+        return len(self.page.locator(self.REMOVE_BUTTON).all())
 
 # # pages/cart_page.py
 # from src.stage3_ui_test.common.base_page import BasePage
