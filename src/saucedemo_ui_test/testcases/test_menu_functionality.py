@@ -14,7 +14,7 @@ import pytest
 
 @pytest.mark.menu
 @pytest.mark.parametrize("logged_in_user", ["standard_user"], indirect=True)
-class TestMenuFunctionality:
+class TestMenuFunctionality:  # 测试用例共同前置条件fixture: logged_in_user 用类式写法
     def test_menu_open_close(self, logged_in_user):
         products_page = logged_in_user
         menu = products_page.menu
@@ -39,6 +39,7 @@ class TestMenuFunctionality:
         products_page.menu.click_reset_app_state()
         assert products_page.get_cart_item_count() == 0  # 购物车为空时 没有角标 针对报错重写get_cart_item_count()
 
+    # 明确组件功能只需要选一个页面测试即可，不需要每个页面都测一次
     def test_navigate_from_cart_page(self, logged_in_user):
         products_page = logged_in_user
         cart_page = products_page.go_to_cart()

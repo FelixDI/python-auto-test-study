@@ -11,7 +11,6 @@
 
 from playwright.sync_api import expect
 from src.saucedemo_ui_test.common.base_page import BasePage
-from src.saucedemo_ui_test.pages.products_page import ProductsPage
 
 
 class MenuComponent(BasePage):
@@ -53,8 +52,23 @@ class MenuComponent(BasePage):
         self.open()
         self.click(self.ALL_ITEMS_LINK)
         self.is_open = False  # 实际上在products_page页面时 点击all items 菜单不关闭 与其他页面功能不一致
+        from src.saucedemo_ui_test.pages.products_page import ProductsPage  # 解决循环导入 采用延迟导入统一风格
         return ProductsPage(self.page)
         # return products_page_class(self.page)
+
+    # 测试文件
+    # from src.saucedemo_ui_test.pages.products_page import ProductsPage
+    #
+    #
+    # def test_menu_all_items(logged_in_user):
+    #
+    #     products_page = logged_in_user
+    #
+    #     new_page = products_page.menu.click_all_items(
+    #         ProductsPage
+    #     )
+    #
+    #     new_page.assert_page_loaded()
 
     def click_about(self):
         self.open()
