@@ -56,13 +56,13 @@ class BasePage:
         self.page.goto(f"{self.base_url}{path}")
 
     # 元素定位器locator参数
-    # def click(self, locator: str):
-    #     self.page.locator(locator).click()
-    def click(self, locator: str | Locator):
-        if isinstance(locator, str):
-            self.page.locator(locator).click()
-        else:
-            locator.click()
+    def click(self, locator: str):
+        self.page.locator(locator).click()
+    # def click(self, locator: str | Locator):
+    #     if isinstance(locator, str):
+    #         self.page.locator(locator).click()
+    #     else:
+    #         locator.click()
 
     def fill(self, locator: str, value: str):
         self.page.locator(locator).fill(value)
