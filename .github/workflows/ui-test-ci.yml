@@ -1,0 +1,49 @@
+# .github/workflows/ui-test-ci.yml
+name: Sauce Demo UI自动化测试
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  run-tests:
+    name: 执行UI测试
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v4
+
+      - name: 设置Python环境
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: 'pip'
+
+      - name: 安装Python依赖
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: 安装Playwright浏览器
+        run: playwright install chromium --with-deps
+
+      - name: 运行所有测试用例
+        run: |
+          export PYTHONPATH=$PYTHONPATH:$(pwd)/src
+          pytest src/saucedemo_ui_test/testcases/ \
+            --html=reports/test-results.html \
+            --self-contained-html \
+            --tb=short \
+            -v
+
+      - name: 上传测试报告
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: 测试报告
+          path: reports/test-results.html
+          retention-days: 30
