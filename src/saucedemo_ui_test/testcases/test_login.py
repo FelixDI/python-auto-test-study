@@ -12,6 +12,7 @@
 """执行登录页面测试"""
 
 import pytest
+from pages.products_page import ProductsPage
 
 
 @pytest.mark.smoke
@@ -23,7 +24,7 @@ import pytest
     "error_user",
     "visual_user"
 ])  # 按用户名遍历用户数据users.json
-def test_successful_login(all_users, username, login_page, products_page):
+def test_successful_login(all_users, username, login_page):
     user_data = all_users[username]
 
     login_page.navigate()
@@ -31,6 +32,7 @@ def test_successful_login(all_users, username, login_page, products_page):
 
     expected_success = user_data["expected"]["login_success"]
     if expected_success:
+        products_page = ProductsPage(login_page.page)
         products_page.assert_page_loaded()
     else:
         login_page.assert_text_contains(login_page.ERROR_MESSAGE, user_data["expected"]["error_message"])
