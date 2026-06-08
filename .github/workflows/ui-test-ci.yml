@@ -42,5 +42,5 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./ui-allure-report
-          # 关键！保留分支里已有的文件，避免未来接口报告被覆盖
+          # 关键！保留分支里已有的文件，避免后续输出多个报告被覆盖
           keep_files: true
