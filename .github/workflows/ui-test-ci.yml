@@ -3,39 +3,37 @@ name: UI Tests and Allure Report
 on:
   push:
     branches: [ main ]
-  pull_request:
-    branches: [ main ]
 
 jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: 检出代码
+        uses: actions/checkout@v4
 
-      - name: Set up Python
+      - name: 设置 Python 3.12
         uses: actions/setup-python@v5
         with:
           python-version: '3.12'
 
-      - name: Install Dependencies
+      - name: 安装依赖
         run: |
           pip install -r requirements.txt
           playwright install chromium --with-deps
 
-      - name: Run UI Tests
+      - name: 运行 UI 测试
         run: |
           pytest src/saucedemo_ui_test/testcases/ -v \
             --alluredir=allure-results \
             --headed=false
 
-      - name: Generate Allure Report
+      - name: 生成 Allure 报告
         run: |
-          # 下载并安装 Allure 命令行工具
-          wget -O allure-2.33.0.tgz https://github.com/allure-framework/allure2/releases/download/2.33.0/allure-2.33.0.tgz
-          tar -xzf allure-2.33.0.tgz
+          wget -q -O allure.tgz https://github.com/allure-framework/allure2/releases/download/2.33.0/allure-2.33.0.tgz
+          tar -xzf allure.tgz
           ./allure-2.33.0/bin/allure generate allure-results -o allure-report --clean
 
-      - name: Deploy to GitHub Pages
+      - name: 部署到 GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
