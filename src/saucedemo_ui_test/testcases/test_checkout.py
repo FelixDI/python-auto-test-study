@@ -14,15 +14,40 @@ import pytest
 
 @pytest.mark.smoke
 @pytest.mark.parametrize("logged_in_user", ["standard_user"], indirect=True)
-@pytest.mark.usefixtures("logged_in_user")
-def test_complete_order(products_page, cart_page, checkout_page):
-    products_page.add_product_to_cart()
-    products_page.go_to_cart()
-    cart_page.assert_page_loaded()
-    cart_page.go_to_checkout()
-    checkout_page.fill_shipping_info("Felix", "Cui", "123456")
-    checkout_page.finish_order()
-    checkout_page.assert_order_complete()
+class TestCheckout:
+    def test_complete_order(self, logged_in_user):
+        products_page = logged_in_user
+        # products_page.add_product_to_cart()
+        products_page.add_product_by_index(3)
+        assert products_page.get_cart_item_count() == 1
+
+        cart_page = products_page.go_to_cart()
+        cart_page.assert_cart_page_loaded()
+
+        checkout_page = cart_page.go_to_checkout()
+        checkout_page.assert_page_loaded()
+
+        checkout_page.fill_shipping_info("Felix", "Cui", "123456")
+        check_step_two_page = checkout_page.click_continue()
+        check_step_two_page.assert_overview_page_loaded()
+
+        complete_page = check_step_two_page.click_finish()
+        complete_page.assert_complete_page_loaded()
+        complete_page.assert_order_complete()
+
+        products_page = complete_page.click_back_home()
+        products_page.assert_page_loaded()
+        assert products_page.get_cart_item_count() == 0
+
+    def test_checkout_with_empty_info(self, logged_in_user):
+        products_page = logged_in_user
+        products_page.add_product_by_index(3)
+        cart_page = products_page.go_to_cart()
+        step_one_page = cart_page.go_to_checkout()
+
+        step_one_page.click_continue()
+        step_one_page.assert_error_message("Error: First Name is required")
+
 
 
 # # test_cases/test_checkout.py
