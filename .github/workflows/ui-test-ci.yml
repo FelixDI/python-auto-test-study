@@ -1,4 +1,4 @@
-# .github/workflows/ui-test-ci.yml
+# .github/workflows/ui-test-allure.yml
 name: Sauce Demo UI自动化测试
 
 on:
@@ -7,9 +7,20 @@ on:
   pull_request:
     branches: [ main ]
 
+# 部署GitHub Pages必需的权限
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# 确保同一时间只有一个部署在运行
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
 jobs:
-  run-tests:
-    name: 执行UI测试
+  test:
+    name: 执行UI测试并生成Allure报告
     runs-on: ubuntu-latest
     timeout-minutes: 10
 
@@ -17,13 +28,13 @@ jobs:
       - name: 检出代码
         uses: actions/checkout@v4
 
-      - name: 设置Python环境
+      - name: 设置Python 3.12.13
         uses: actions/setup-python@v5
         with:
           python-version: '3.12'
           cache: 'pip'
 
-      - name: 安装Python依赖
+      - name: 安装依赖
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
@@ -31,19 +42,47 @@ jobs:
       - name: 安装Playwright浏览器
         run: playwright install chromium --with-deps
 
-      - name: 运行所有测试用例
+      - name: 运行测试生成Allure结果
         run: |
           export PYTHONPATH=$PYTHONPATH:$(pwd)/src
           pytest src/saucedemo_ui_test/testcases/ \
-            --html=reports/test-results.html \
-            --self-contained-html \
-            --tb=short \
+            --alluredir=allure-results \
+            --clean-alluredir \
             -v
 
-      - name: 上传测试报告
+      - name: 上传Allure结果
         uses: actions/upload-artifact@v4
-        if: always()
         with:
-          name: 测试报告
-          path: reports/test-results.html
-          retention-days: 30
+          name: allure-results
+          path: allure-results
+
+  deploy:
+    name: 部署Allure报告到GitHub Pages
+    needs: test
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: 下载Allure结果
+        uses: actions/download-artifact@v4
+        with:
+          name: allure-results
+          path: allure-results
+
+      - name: 生成Allure报告
+        uses: simple-elf/allure-report-action@master
+        with:
+          allure_results: allure-results
+          allure_history: allure-history
+          keep_reports: 20  # 保留最近20次测试报告
+
+      - name: 配置GitHub Pages
+        uses: actions/configure-pages@v5
+
+      - name: 部署报告
+        id: deployment
+        uses: actions/deploy-pages@v4
+        with:
+          path: allure-history
