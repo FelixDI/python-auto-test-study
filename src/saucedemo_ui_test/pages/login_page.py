@@ -9,7 +9,7 @@
 # @Description : login page
 
 
-"""使用父类封装的方法，实现当前页面 正确访问页面、报错、该页面的所有按钮功能定义"""
+"""使用父类封装的方法，实现当前页面 正确访问页面、报错、该页面的所有按钮功能定义,即业务封装类"""
 
 from src.saucedemo_ui_test.common.base_page import BasePage
 
@@ -30,6 +30,7 @@ class LoginPage(BasePage):
     def navigate(self):
         super().navigate("")
 
+    # Login场景特殊处理  因为登录会成功或者失败 所有就不return ProductsPage(self.page)
     def login(self, username: str, password: str):
         self.fill(self.USERNAME_INPUT, username)  # BasePage封装的类方法直接用
         self.fill(self.PASSWORD_INPUT, password)
