@@ -64,6 +64,10 @@ class ProductsPage(BasePage):
     def get_product_name_by_index(self, index: int) ->str:
         return self.page.locator(self.PRODUCT_NAME).nth(index).text_content
 
+    # 用于名称排序
+    def get_all_product_names(self) -> list[str]:
+        return self.page.locator(self.PRODUCT_NAME).all_text_contents()
+
     def add_product_by_index(self, index: int):
         """添加指定索引的商品到购物车"""
         self.page.locator(self.ADD_TO_CART_BUTTONS).nth(index).click()  # nth(0～5)
@@ -107,7 +111,21 @@ class ProductsPage(BasePage):
 
         return int(self.get_text(self.CART_BADGE))
 
-    # 高内聚低耦合：每个页面对象只负责自己的操作，不依赖其他页面
+    def sort_by(self, value: str):
+        self.page.locator(self.SORT_CONTAINER).select_option(value)
+        selected_value = self.page.locator(self.SORT_CONTAINER).input_value()
+        assert selected_value == value, f"排序失败，预期选中{value}，实际选中{selected_value}"
+
+    # 用于价格排序
+    def get_all_prices(self) -> list[float]:
+        price_elements = self.page.locator(self.PRODUCT_PRICE)
+        prices = []
+        for price_text in price_elements.all_text_contents():
+            clean_price = price_text.strip().replace("$", "")
+            prices.append(float(clean_price))
+
+        return prices
+
     def go_to_cart(self) -> CartPage:
         self.click(self.CART_LINK)
         return CartPage(self.page)
