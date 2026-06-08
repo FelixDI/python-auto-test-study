@@ -19,8 +19,6 @@ import allure
 from playwright.sync_api import Page
 from src.saucedemo_ui_test.pages.login_page import LoginPage
 from src.saucedemo_ui_test.pages.products_page import ProductsPage
-from src.saucedemo_ui_test.pages.cart_page import CartPage
-from src.saucedemo_ui_test.pages.checkout_page import CheckoutPage
 
 
 # 整个测试会话只执行一次 加载所有用户数据
@@ -34,29 +32,29 @@ def all_users():
 
 # pytest 会做以下事情：
 # 看到login_page夹具需要一个叫page的参数
-# 搜索所有已加载的插件和 conftest.py，查找有没有叫page的夹具  例如stage3_ui_test/conftest.py 实现手动创建实例page
+# 搜索所有已加载的插件和 conftest.py，查找有没有叫page的夹具  例如conftest.py 实现手动创建实例page
 # conftest.py没有的话，就去找到pytest-playwright插件提供的page夹具
 # 运行page夹具，获取它的返回值（就是实际的浏览器页面对象）
 # 把这个返回值作为参数传递给login_page夹具
-# login_page夹具把这个 page 对象传递给LoginPage的构造函数
+# login_page夹具把这个 page实例 传递给LoginPage的构造函数（继承父类BasePage）
 @pytest.fixture(scope="function")
 def login_page(page: Page) -> LoginPage:
     return LoginPage(page)
 
-
-@pytest.fixture(scope="function")
-def products_page(page: Page) -> ProductsPage:
-    return ProductsPage(page)
-
-
-@pytest.fixture(scope="function")
-def cart_page(page: Page) -> CartPage:
-    return CartPage(page)
-
-
-@pytest.fixture(scope="function")
-def checkout_page(page: Page) -> CheckoutPage:
-    return CheckoutPage(page)
+# 除 login_page之外 后续页面都涉及业务链路 fixture不宜直接提供
+# @pytest.fixture(scope="function")
+# def products_page(page: Page) -> ProductsPage:
+#     return ProductsPage(page)
+#
+#
+# @pytest.fixture(scope="function")
+# def cart_page(page: Page) -> CartPage:
+#     return CartPage(page)
+#
+#
+# @pytest.fixture(scope="function")
+# def checkout_page(page: Page) -> CheckoutPage:
+#     return CheckoutPage(page)
 
 #
 # @pytest.fixture(scope="function")
@@ -75,17 +73,21 @@ def checkout_page(page: Page) -> CheckoutPage:
 #     "error_user",
 #     "visual_user"
 @pytest.fixture(scope="function")
-def logged_in_user(request, login_page, products_page, all_users):
+def logged_in_user(request, login_page, all_users):
     # @pytest.mark.parametrize("logged_in_user", ["standard_user"], indirect=True)
     username = request.param  # request是Pytest的内置Fixture,它包含当前测试上下文信息。 request.param=="standard_user"
     user_data = all_users[username]
-
+    # 传参login_page 浏览器about:blank, login_page.navigate() -> login_page, login_page.login() -> products_page
     login_page.navigate()
-    login_page.login(user_data["username"], user_data["password"])
+    # 若logged_in_user传参fixture创建的products_page,提前引入了 products_page 这个“语义对象”，但页面状态还没到 products
+    login_page.login(user_data["username"], user_data["password"])  # login → products
     # users.json中的locked_out_user被排除
     if user_data["expected"]["login_success"]:
+        products_page = ProductsPage(login_page.page)
         products_page.assert_page_loaded()
         yield products_page
+    else:
+        yield login_page
 
 
 # 失败自动截图钩子
