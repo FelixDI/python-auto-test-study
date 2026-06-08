@@ -186,3 +186,5 @@ PythonAutoTest/
 ## 测试报告
 
 [电商 Allure 接口测试报告](https://felixdi.github.io/python-auto-test-study/reports/allure-report/)
+
+[Saucedemo Allure UI测试报告](https://felixdi.github.io/python-auto-test-study/)

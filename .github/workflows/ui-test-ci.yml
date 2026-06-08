@@ -35,10 +35,12 @@ jobs:
         run: |
           wget -q -O allure.tgz https://github.com/allure-framework/allure2/releases/download/2.33.0/allure-2.33.0.tgz
           tar -xzf allure.tgz
-          ./allure-2.33.0/bin/allure generate allure-results -o allure-report --clean
+          ./allure-2.33.0/bin/allure generate allure-results -o ui-allure-report --clean
 
       - name: 部署到 GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./allure-report
+          publish_dir: ./ui-allure-report
+          # 关键！保留分支里已有的文件，避免未来接口报告被覆盖
+          keep_files: true
