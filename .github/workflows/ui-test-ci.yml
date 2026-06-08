@@ -35,7 +35,7 @@ jobs:
         run: |
           wget -q -O allure.tgz https://github.com/allure-framework/allure2/releases/download/2.33.0/allure-2.33.0.tgz
           tar -xzf allure.tgz
-          ./allure-2.33.0/bin/allure generate allure-results -o ui-allure-report --clean
+          ./allure-2.33.0/bin/allure generate allure-results -o allure-report --clean
 
       - name: 部署到 GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
