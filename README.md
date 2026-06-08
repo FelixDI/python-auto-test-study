@@ -28,7 +28,8 @@ PythonAutoTest/
 ├── docs/
 │   ├── 01_搭建环境踩坑.md
 │   ├── 02_测试理论.md
-│   └── 03_补充.md
+│   ├── 03_补充.md
+│   └── 04_UI测试POM踩坑.md
 ├── reports/
 │   ├── playwright/
 │   │   ├── saucedemo_after_login.png
@@ -130,7 +131,7 @@ PythonAutoTest/
 ├── testgitpush.py
 └── update_tree.py
 
-24 directories, 81 files
+24 directories, 82 files
 ```
 <!-- PROJECT_STRUCTURE_END -->
 

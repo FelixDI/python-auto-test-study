@@ -34,21 +34,23 @@ class BasePage:
 
     def __init__(self, page: Page):
     # def __init__(self, playwright_page: Page):
-        self.page = page  # Playwright框架提供的浏览器页面对象Page提供给基类直接使用封装好的大量函数goto()locator()fill()click()等等
+        self.page = page  # 类属性绑定实例page的引用,基类通过self.page使用实例封装好的函数goto()locator()fill()click()等等
         self.base_url = "https://www.saucedemo.com"
-        self._menu = None  #标记为 未创建该组件的状态
-    #
-    #
-    # saucedemo页面对象较少 手动__init__注入菜单组件对象尚且能够应付。数百个页面对象时就是灾难 而且不是所有页面对象都有该组件对象
-    # 最优的方式 应该采用函数调用方式 测试用例真正使用组件时page.menu，才会创建它，避免了不必要的资源消耗
-    # 还能避免页面对象、组件对象出现循环导入import
-    # property属性装饰器 把一个需要执行逻辑的方法伪装成普通属性访问 不需要page.menu()这样调用
-    @property
-    def menu(self):
-        if not self._menu:
-            from src.saucedemo_ui_test.components.menu_component import MenuComponent
-            self._menu = MenuComponent(self.page)
-        return self._menu
+
+    # 不要把组件放在基类 最终发展成上帝类
+    #     self._menu = None  #标记为 未创建该组件的状态
+    # #
+    # #
+    # # saucedemo页面对象较少 手动__init__注入菜单组件对象尚且能够应付。数百个页面对象时就是灾难 而且不是所有页面对象都有该组件对象
+    # # 最优的方式 应该采用函数调用方式 测试用例真正使用组件时page.menu，才会创建它，避免了不必要的资源消耗
+    # # 还能避免页面对象、组件对象出现循环导入import
+    # # property属性装饰器 把一个需要执行逻辑的方法伪装成普通属性访问 不需要page.menu()这样调用
+    # @property
+    # def menu(self):
+    #     if not self._menu:
+    #         from src.saucedemo_ui_test.components.menu_component import MenuComponent
+    #         self._menu = MenuComponent(self.page)
+    #     return self._menu
 
     def navigate(self, path: str = ""):
         self.page.goto(f"{self.base_url}{path}")
