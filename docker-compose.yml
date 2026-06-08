@@ -1,4 +1,5 @@
-version: "3.9"
+x-common-env: &common-env
+  TZ: Asia/Shanghai
 
 services:
   # 1. 数据库 (MySQL) —— 最先启动
@@ -7,6 +8,7 @@ services:
     container_name: mysql-test
     restart: always
     environment:
+      <<: *common-env
       MYSQL_ROOT_PASSWORD: root123      # root 密码
       MYSQL_DATABASE: test_db           # 自动创建测试库
     ports:
@@ -22,6 +24,8 @@ services:
     image: api-image                    # 固定镜像名，避免自动生成 pythonautotest-api
     container_name: fastapi
     restart: always
+    environment:
+      <<: *common-env
     ports:
       - "8000:8000"
     depends_on:
@@ -34,6 +38,8 @@ services:
     image: jenkins/jenkins:lts
     container_name: jenkins
     restart: always
+    environment:
+      <<: *common-env
     ports:
       - "8080:8080"
       - "50000:50000"
@@ -41,7 +47,7 @@ services:
       - ./jenkins_home:/var/jenkins_home # Jenkins 配置持久化
       - /var/run/docker.sock:/var/run/docker.sock  # 允许 Jenkins 调用 Docker
     depends_on:
-      - db
+      - api
     networks:
       - test-network
 

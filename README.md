@@ -40,6 +40,7 @@ PythonAutoTest/
 │   ├── stage2_final_report.html
 │   └── test_report_20260515_204741.txt
 ├── src/
+│   ├── ecommerce_api_test/
 │   ├── exercises/
 │   │   └── pythonreview/
 │   │       ├── data/
@@ -131,7 +132,7 @@ PythonAutoTest/
 ├── testgitpush.py
 └── update_tree.py
 
-24 directories, 82 files
+25 directories, 82 files
 ```
 <!-- PROJECT_STRUCTURE_END -->
 
@@ -185,6 +186,10 @@ PythonAutoTest/
 
 ## 测试报告
 
+
+#### API test: src/ecommerce_api_test
 [电商 Allure 接口测试报告](https://felixdi.github.io/python-auto-test-study/reports/allure-report/)
 
+
+#### UI test: src/saucedemo_ui_test
 [SauceDemo Allure UI测试报告](https://felixdi.github.io/python-auto-test-study/ui-allure-report/)
