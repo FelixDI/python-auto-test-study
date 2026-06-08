@@ -7,25 +7,38 @@
 # @PythonEnv   : Python 3.12 (pythonautotest-py312)
 # @IDE         : PyCharm
 # @Description : 购物车测试
-
+from unittest import TestCase
 
 import pytest
 
 
 @pytest.mark.parametrize("logged_in_user", ["standard_user"], indirect=True)
-@pytest.mark.usefixtures("logged_in_user")
-def test_cart_item_count(products_page, cart_page):
-    products_page.add_product_to_cart()
-    products_page.go_to_cart()
-    assert cart_page.get_cart_items_count() == 1
+class TestCartPage:
+    def test_cart_page_loaded(self, logged_in_user):
+        products_page = logged_in_user
+        cart_page = products_page.go_to_cart()
+        cart_page.assert_cart_page_loaded()
 
+    def test_cart_item_count(self, logged_in_user):
+        products_page = logged_in_user
+        products_page.add_product_to_cart()
+        cart_page = products_page.go_to_cart()
+        assert cart_page.get_cart_items_count() == 1
 
-@pytest.mark.parametrize("logged_in_user", ["standard_user"], indirect=True)
-@pytest.mark.usefixtures("logged_in_user")
-def test_go_to_checkout(products_page, cart_page, checkout_page):
-    products_page.go_to_cart()  # 夹具中logged_in_user只进行了登录成功进入商品页面 所以要增加一步 点击购物车
-    cart_page.go_to_checkout()
-    checkout_page.assert_url_contains("/checkout-step-one.html")
+        cart_page.remove_item_by_index(0)
+        assert cart_page.get_cart_items_count() == 0
+
+    def test_go_to_checkout(self,logged_in_user):
+        products_page = logged_in_user
+        cart_page = products_page.go_to_cart()
+        checkout_page = cart_page.go_to_checkout()
+        checkout_page.assert_url_contains("/checkout-step-one.html")
+
+    def test_click_continue_shopping(self,logged_in_user):
+        cart_page = logged_in_user.go_to_cart()
+        products_page = cart_page.click_continue_shopping()
+        products_page.assert_page_loaded()
+
 
 
 # # test_cases/test_cart.py

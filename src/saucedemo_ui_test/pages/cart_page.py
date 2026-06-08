@@ -30,7 +30,7 @@ class CartPage(BasePage):
 
     # 高内聚低耦合：每个页面对象只负责自己的操作，不依赖其他页面  进入cart界面 实际上是products页面的按钮功能
     # cart_page这里只需要定义一个 验证方法assert_page_loaded 被实例调用
-    def assert_page_loaded(self):
+    def assert_cart_page_loaded(self):
         self.assert_text_contains(self.PAGE_TITLE, "Your Cart")
         self.assert_url_contains("/cart.html")
 
