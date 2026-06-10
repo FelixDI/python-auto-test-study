@@ -41,8 +41,14 @@ PythonAutoTest/
 │   └── test_report_20260515_204741.txt
 ├── src/
 │   ├── ecommerce_api_test/
-│   │   └── common/
-│   │       └── base_api.py
+│   │   ├── apis/
+│   │   │   ├── order_api.py
+│   │   │   ├── product_api.py
+│   │   │   └── user_api.py
+│   │   ├── common/
+│   │   │   └── base_api.py
+│   │   └── data/
+│   │       └── test_data.json
 │   ├── exercises/
 │   │   └── pythonreview/
 │   │       ├── data/
@@ -134,7 +140,7 @@ PythonAutoTest/
 ├── testgitpush.py
 └── update_tree.py
 
-26 directories, 83 files
+28 directories, 87 files
 ```
 <!-- PROJECT_STRUCTURE_END -->
 
