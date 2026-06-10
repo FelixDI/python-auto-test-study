@@ -66,6 +66,7 @@ class DBUtil:
             self.conn.close()  # pymysql
             self.conn = None
 
+    # 查询封装层
     def query_one(self, sql: str, params: Tuple = None) -> Optional[Dict]:
         with self.conn.cursor() as cursor:
             cursor.execute(sql, params)  # 防 SQL 注入,params 会把输入“强制当作普通字符串处理”，不会让它参与 SQL 语法解析
@@ -79,15 +80,17 @@ class DBUtil:
             cursor.execute(sql, params)  # cursor.execute("SELECT * FROM users")
             return cursor.fetchall()
 
+    # DBUtil “写操作层”：负责 INSERT / UPDATE / DELETE
     def execute(self, sql: str, params: Tuple = None) -> int:
         with self.conn.cursor() as cursor:
-            affected_rows = cursor.execute(sql, params)
-            self.conn.commit()
+            affected_rows = cursor.execute(sql, params)  # 执行sql语句
+            self.conn.commit()  # 写入数据库
             return affected_rows
 
     def execute_many(self, sql: str, params_list: List[Tuple]) -> int:
         with self.conn.cursor() as cursor:
-            affected_rows = cursor.execute(sql, params_list)
+            # execute 用于单条写操作，executemany 用于批量写操作，两者都会返回影响行数
+            affected_rows = cursor.executemany(sql, params_list)
             self.conn.commit()
             return affected_rows
 
