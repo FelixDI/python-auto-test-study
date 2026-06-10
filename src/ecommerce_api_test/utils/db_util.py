@@ -95,6 +95,83 @@ class DBUtil:
             return affected_rows
 
 
-
-
-
+# # src/ecommerce_api_test/utils/db_util.py
+# import pymysql
+# from typing import Optional, Dict, List, Tuple
+#
+# class DBUtil:
+#     """
+#     数据库工具类，封装 MySQL 连接和基本操作
+#     保持纯粹：只负责数据库操作，不处理环境配置
+#     所有配置由外部注入
+#     """
+#
+#     def __init__(
+#         self,
+#         host: str,
+#         port: int = 3306,
+#         user: str = "root",
+#         password: str = "root123",
+#         database: str = "ecommerce",
+#     ):
+#         self.host = host
+#         self.port = port
+#         self.user = user
+#         self.password = password
+#         self.database = database
+#         self.conn: Optional[pymysql.Connection] = None
+#
+#     def __enter__(self) -> "DBUtil":
+#         """支持 with 语句，自动建立连接"""
+#         self.connect()
+#         return self
+#
+#     def __exit__(self, exc_type, exc_val, exc_tb):
+#         """退出 with 语句时自动关闭连接"""
+#         self.close()
+#
+#     def connect(self):
+#         """建立数据库连接"""
+#         if not self.conn or not self.conn.open:
+#             self.conn = pymysql.connect(
+#                 host=self.host,
+#                 port=self.port,
+#                 user=self.user,
+#                 password=self.password,
+#                 database=self.database,
+#                 charset="utf8mb4",
+#                 cursorclass=pymysql.cursors.DictCursor,
+#                 autocommit=False  # 关闭自动提交，手动控制事务
+#             )
+#
+#     def close(self):
+#         """关闭数据库连接"""
+#         if self.conn and self.conn.open:
+#             self.conn.close()
+#             self.conn = None
+#
+#     def query_one(self, sql: str, params: Tuple = None) -> Optional[Dict]:
+#         """执行查询并返回第一条结果"""
+#         with self.conn.cursor() as cursor:
+#             cursor.execute(sql, params)
+#             return cursor.fetchone()
+#
+#     def query_all(self, sql: str, params: Tuple = None) -> List[Dict]:
+#         """执行查询并返回全部结果"""
+#         with self.conn.cursor() as cursor:
+#             cursor.execute(sql, params)
+#             return cursor.fetchall()
+#
+#     def execute(self, sql: str, params: Tuple = None) -> int:
+#         """执行增删改操作，返回影响行数"""
+#         with self.conn.cursor() as cursor:
+#             affected_rows = cursor.execute(sql, params)
+#             self.conn.commit()
+#             return affected_rows
+#
+#     def execute_many(self, sql: str, params_list: List[Tuple]) -> int:
+#         """批量执行增删改操作"""
+#         with self.conn.cursor() as cursor:
+#             affected_rows = cursor.executemany(sql, params_list)
+#             self.conn.commit()
+#             return affected_rows
