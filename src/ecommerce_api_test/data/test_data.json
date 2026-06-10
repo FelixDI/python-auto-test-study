@@ -1,0 +1,38 @@
+{
+  "test_user": {
+    "username": "testuser_20260530",
+    "password": "testpass123",
+    "email": "test@example.com"
+  },
+  "invalid_user": {
+    "username": "nonexistent_user",
+    "password": "wrongpass"
+  },
+  "products": [
+    {
+      "name": "iPhone 15 Pro",
+      "price": 7999.0,
+      "stock": 100
+    },
+    {
+      "name": "MacBook Air M4",
+      "price": 8999.0,
+      "stock": 50
+    },
+    {
+      "name": "AirPods Pro 2",
+      "price": 1899.0,
+      "stock": 200
+    }
+  ],
+  "orders": [
+    {
+      "product_index": 0,
+      "quantity": 1
+    },
+    {
+      "product_index": 1,
+      "quantity": 2
+    }
+  ]
+}
