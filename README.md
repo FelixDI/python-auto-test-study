@@ -41,6 +41,8 @@ PythonAutoTest/
 │   └── test_report_20260515_204741.txt
 ├── src/
 │   ├── ecommerce_api_test/
+│   │   └── common/
+│   │       └── base_api.py
 │   ├── exercises/
 │   │   └── pythonreview/
 │   │       ├── data/
@@ -132,7 +134,7 @@ PythonAutoTest/
 ├── testgitpush.py
 └── update_tree.py
 
-25 directories, 82 files
+26 directories, 83 files
 ```
 <!-- PROJECT_STRUCTURE_END -->
 
@@ -150,7 +152,8 @@ PythonAutoTest/
 
 - 03 电商接口测试项目实战 ✅
      pytest + requests + pymysql + Allure + Jenkins + Docker
-
+     AOP重构
+     
 - 04 SauceDemo项目实战UI自动化测试 ✅
      playwright实战 (POM + component object)
      selenium稍做了解
@@ -188,7 +191,7 @@ PythonAutoTest/
 
 
 #### API test: src/ecommerce_api_test
-[电商 Allure 接口测试报告](https://felixdi.github.io/python-auto-test-study/reports/allure-report/)
+[ecommerce Allure api测试报告](https://felixdi.github.io/python-auto-test-study/api-allure-report/)
 
 
 #### UI test: src/saucedemo_ui_test

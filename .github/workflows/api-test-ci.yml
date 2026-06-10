@@ -1,0 +1,45 @@
+name: API Tests and Allure Report
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    # 为 peaceiris/actions-gh-pages 提供写入权限
+    permissions:
+      contents: write
+
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v4
+
+      - name: 设置 Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: 安装依赖
+        run: |
+          pip install -r requirements.txt
+
+      - name: 运行 API 测试
+        run: |
+          pytest src/ecommerce_api_test/ -v \
+            --alluredir=allure-results
+
+      - name: 生成 Allure 报告
+        run: |
+          wget -q -O allure.tgz https://github.com/allure-framework/allure2/releases/download/2.33.0/allure-2.33.0.tgz
+          tar -xzf allure.tgz
+          ./allure-2.33.0/bin/allure generate allure-results -o allure-report --clean
+
+      - name: 部署到 GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./allure-report
+          destination_dir: api-allure-report
+          # 关键！保留分支里已有的文件，避免后续输出多个报告被覆盖
+          keep_files: true
