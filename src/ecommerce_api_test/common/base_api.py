@@ -106,11 +106,19 @@ class BaseApi:
     def delete(self, endpoint: str, **kwargs) -> requests.Response:
         return self._request(method="DELETE", endpoint=endpoint, **kwargs)
 
+    # def get_json(self):
+    #     try:
+    #         return self.response.json()
+    #     except json.JSONDecodeError:
+    #         pytest.fail("响应不是有效的JSON格式")
+
     def assert_status_code(self, expected_status: int):
         assert self.response.status_code == expected_status, \
         f"状态码错误：预期{expected_status}，实际{self.response.status_code}"
 
     def assert_json_data(self, expected_data: Dict[str, Any]):
+        # actual_data = self.get_json()
+
         try:
             actual_data = self.response.json()
         except json.JSONDecodeError:
