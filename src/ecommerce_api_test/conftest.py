@@ -13,6 +13,7 @@ import pytest
 import json
 import os
 
+from pathlib import Path
 from src.ecommerce_api_test.apis.user_api import UserApi
 from src.ecommerce_api_test.apis.product_api import ProductApi
 from src.ecommerce_api_test.apis.order_api import OrderApi
@@ -47,6 +48,18 @@ def db_util(env_config):
 
     db.close()
     print("\n数据库连接已关闭")
+
+@pytest.fixture(scope="session", autouse=True)
+def init_db(db_util):
+    schema_file = Path(__file__).parent / "db" / "schema.sql"
+    sql = schema_file.read_text()
+    statements = [
+        s.strip() for s in sql.split(';')
+        if s.strip() and not s.strip().startswith('--')
+        and not s.strip().startswith('CREATE DATABASE')
+    ]
+    for statement in statements:
+        db_util.execute(statement)
 
 @pytest.fixture(scope="session", autouse=True)
 def clean_database_before_test(db_util):
