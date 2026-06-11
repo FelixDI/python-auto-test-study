@@ -50,6 +50,7 @@ PythonAutoTest/
 │   │   ├── data/
 │   │   │   └── test_data.json
 │   │   ├── test_cases/
+│   │   │   ├── test_order.py
 │   │   │   ├── test_product.py
 │   │   │   └── test_user.py
 │   │   ├── utils/
@@ -147,7 +148,7 @@ PythonAutoTest/
 ├── testgitpush.py
 └── update_tree.py
 
-30 directories, 92 files
+30 directories, 93 files
 ```
 <!-- PROJECT_STRUCTURE_END -->
 
