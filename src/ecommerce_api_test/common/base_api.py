@@ -116,7 +116,7 @@ class BaseApi:
         assert self.response.status_code == expected_status, \
         f"状态码错误：预期{expected_status}，实际{self.response.status_code}"
 
-    def assert_json_data(self, expected_data: Dict[str, Any]):
+    def assert_json_contains(self, expected_data: Dict[str, Any]):
         # actual_data = self.get_json()
 
         try:
