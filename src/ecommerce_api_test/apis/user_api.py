@@ -26,7 +26,17 @@ class UserApi(BaseApi):
         response = self.post(endpoint="/login", data=data)
 
         if response.status_code == 200:
-            token = response.json()["token"]
+            token = response.json()["access_token"]
             self.set_auth_token(token)
 
         return response
+
+    # # 因为fastapi功能有限，下面的接口操作仅作为代码练习 /users/register  /users/login 后端最好都放在/users下
+    # def delete_profile(self, username: str):
+    #     return self.delete(endpoint="/users/profile/{username}", json={"username": username})
+    #
+    # def update_profile(self, **kwargs):
+    #     return self.put(endpoint="/users/profile", json=kwargs)
+    #
+    # def get_profile(self):
+    #     return self.get(endpoint="/users/profile")
