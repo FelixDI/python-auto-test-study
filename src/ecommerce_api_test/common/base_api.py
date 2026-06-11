@@ -23,7 +23,7 @@ class BaseApi:
         self.session = requests.Session()  # 所有请求共用一个Session
         # 默认请求头
         self.session.headers.update({
-            "Content-Type": "application/json",
+            # "Content-Type": "application/json",   # fastapi login 需要data= 编码成表单请求体
             "User-Agent":"Ecommerce-Api-Test/1.0"
         })
         self.response = None
