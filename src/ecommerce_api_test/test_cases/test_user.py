@@ -24,7 +24,7 @@ def test_user_register_success_and_password_encrypted(user_api, db_util, test_da
 
     # 响应断言
     user_api.assert_status_code(200)  # 基类BaseApi封装三个断言
-    user_api.assert_json_data({
+    user_api.assert_json_contains({
         "username": new_user["username"],
         "email": new_user["email"],
     })
