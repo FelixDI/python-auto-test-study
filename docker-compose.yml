@@ -10,7 +10,7 @@ services:
     environment:
       <<: *common-env
       MYSQL_ROOT_PASSWORD: root123      # root 密码
-      MYSQL_DATABASE: test_db           # 自动创建测试库
+      MYSQL_DATABASE: ecommerce           # 自动创建测试库
     ports:
       - "3306:3306"
     volumes:

@@ -166,7 +166,7 @@ PythonAutoTest/
 
 - 03 电商接口测试项目实战 ✅
      pytest + requests + pymysql + Allure + Jenkins + Docker
-     AOP重构
+     AOP重构 + 数据库校验
      
 - 04 SauceDemo项目实战UI自动化测试 ✅
      playwright实战 (POM + component object)
