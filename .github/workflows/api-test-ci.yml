@@ -7,7 +7,6 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
-    # 为 peaceiris/actions-gh-pages 提供写入权限
     permissions:
       contents: write
 
@@ -20,14 +19,20 @@ jobs:
         with:
           python-version: '3.12'
 
+      # 核心步骤：启动测试依赖的 db 和 api 服务
+      - name: 启动测试环境
+        run: |
+          docker compose up -d db api
+          # 等待 API 服务就绪
+          timeout 60 bash -c 'while [[ "$(curl -s -o /dev/null -w ''%{http_code}'' http://localhost:8000/)" != "200" ]]; do sleep 2; done'
+
       - name: 安装依赖
         run: |
           pip install -r requirements.txt
 
       - name: 运行 API 测试
         run: |
-          pytest src/ecommerce_api_test/ -v \
-            --alluredir=allure-results
+          pytest src/ecommerce_api_test/ -v --alluredir=allure-results
 
       - name: 生成 Allure 报告
         run: |
@@ -41,5 +46,4 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./allure-report
           destination_dir: api-allure-report
-          # 关键！保留分支里已有的文件，避免后续输出多个报告被覆盖
           keep_files: true
