@@ -50,7 +50,7 @@ def db_util(env_config):
 
 @pytest.fixture(scope="session", autouse=True)
 def clean_database_before_test(db_util):
-    tables = {"order_items", "orders", "products", "users"}  # 用order_items存储每个订单的商品明细(商品 ID、购买数量、下单单价)
+    tables = {"orders", "products", "users"}  # 用order_items存储每个订单的商品明细(商品 ID、购买数量、下单单价)
 
     db_util.execute("SET FOREIGN_KEY_CHECKS = 0")  # 临时关闭外键约束 允许删除/清空有外键关联的表
     for table in tables:

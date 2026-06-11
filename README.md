@@ -49,6 +49,8 @@ PythonAutoTest/
 │   │   │   └── base_api.py
 │   │   ├── data/
 │   │   │   └── test_data.json
+│   │   ├── test_cases/
+│   │   │   └── test_user.py
 │   │   ├── utils/
 │   │   │   └── db_util.py
 │   │   └── conftest.py
@@ -114,7 +116,8 @@ PythonAutoTest/
 │   │   ├── data/
 │   │   ├── server/
 │   │   │   ├── app/
-│   │   │   │   └── main.py
+│   │   │   │   ├── main.py
+│   │   │   │   └── temp.py
 │   │   │   ├── Dockerfile
 │   │   │   └── requirements.txt
 │   │   └── test_cases/
@@ -143,7 +146,7 @@ PythonAutoTest/
 ├── testgitpush.py
 └── update_tree.py
 
-29 directories, 89 files
+30 directories, 91 files
 ```
 <!-- PROJECT_STRUCTURE_END -->
 
