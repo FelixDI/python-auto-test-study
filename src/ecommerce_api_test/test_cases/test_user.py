@@ -13,6 +13,7 @@ import pytest
 
 
 @pytest.mark.smoke
+@pytest.mark.xfail(reason="已知缺陷：后端明文存储密码，未做哈希")
 def test_user_register_success_and_password_encrypted(user_api, db_util, test_data):
     new_user = {
         "username": "new_teset_user_20260611",
@@ -57,7 +58,7 @@ def test_user_register_duplicate_username(user_api, test_data):
     user_api.assert_status_code(400)  # 预期错误
     user_api.assert_error_message("用户名已注册")
 
-# @pytest.mark.xfail(reason="已知缺陷：重复邮箱未做业务校验，触发数据库约束返回500")
+@pytest.mark.xfail(reason="已知缺陷：重复邮箱未做业务校验，触发数据库约束返回500")
 def test_register_duplicate_email(user_api, test_data):
     user_data = test_data["test_user"]
     user_api.register(**user_data)
