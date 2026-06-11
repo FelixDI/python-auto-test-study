@@ -149,7 +149,7 @@ class BaseApi:
             pytest.fail("响应不是有效的JSON格式")
 
         assert "detail" in actual_data, "错误响应缺少detail字段"
-        assert expected_message in actual_data["detail"], \
+        assert expected_message == actual_data["detail"], \
         f"错误信息不匹配：预期包含'{expected_message}'，实际是'{actual_data['detail']}'"
 
     def close(self) -> None:
