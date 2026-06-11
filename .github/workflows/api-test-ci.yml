@@ -35,6 +35,7 @@ jobs:
           pytest src/ecommerce_api_test/ -v --alluredir=allure-results
 
       - name: 生成 Allure 报告
+        if: always()    # ← 这行告诉它：不管前面成功还是失败，都执行这一步
         run: |
           wget -q -O allure.tgz https://github.com/allure-framework/allure2/releases/download/2.33.0/allure-2.33.0.tgz
           tar -xzf allure.tgz
