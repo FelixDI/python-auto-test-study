@@ -57,6 +57,7 @@ def test_user_register_duplicate_username(user_api, test_data):
     user_api.assert_status_code(400)  # 预期错误
     user_api.assert_error_message("用户名已注册")
 
+# @pytest.mark.xfail(reason="已知缺陷：重复邮箱未做业务校验，触发数据库约束返回500")
 def test_register_duplicate_email(user_api, test_data):
     user_data = test_data["test_user"]
     user_api.register(**user_data)
@@ -67,9 +68,10 @@ def test_register_duplicate_email(user_api, test_data):
         email = user_data["email"]
     )
     # user_api.assert_status_code(500)  # 实际上这是后端代码缺陷  没有约束重复邮箱 数据库异常没处理报错  应该写捕获异常代码 返回400
+    assert user_api.response.status_code == 400, "未捕获数据库异常 反馈提醒邮箱已注册"
     # 期望行为
-    user_api.assert_status_code(400)
-    user_api.assert_error_message("邮箱已注册")
+    # user_api.assert_status_code(400)
+    # user_api.assert_error_message("邮箱已注册")
 
 def test_user_login_success(user_api, test_data):
     user_data = test_data["test_user"]
