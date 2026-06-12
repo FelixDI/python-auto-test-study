@@ -18,7 +18,7 @@ flowchart LR
 
 
 # Python 自动化测试学习
-  最终目标：接口测试、UI测试、AI提效
+  最终目标：接口测试、UI测试、AI测试工作流提效、测试智能体
 
 ## 目录结构
 
@@ -161,9 +161,10 @@ PythonAutoTest/
 - 01 环境搭建完成 ✅
      miniforge+pycharm+git+github
      docker desktop(fastapi+mysql+Jenkins)
+     gitclone本地部署dify，配置DeepSeekv4pro API key
      
 - 02 Python 基础学习 ✅
-     core python programing 书太厚太全面了跟着敲代码还是学了就忘。
+     core python programing 书本代码边敲边忘
      Python 基础语法回顾（面向自动化测试）目标复习自动化测试高频用到的 Python 语法。
 
 - 03 电商接口测试项目实战 ✅
@@ -172,14 +173,14 @@ PythonAutoTest/
      
 - 04 SauceDemo项目实战UI自动化测试 ✅
      playwright实战 (POM + component object)
-     selenium稍做了解
+     selenium对比代码区别快速上手
 
 - 05 AI测试
      AI测试提效 dify+DeepSeekv4pro 
      创建工作流,设计测试用例、生成测试代码  ✅
      
      AI测试智能体：
-     Hermes自我进化优势突出，但目前尚不稳定 不能落地企业场景
+     Hermes智能体 自我进化优势突出，但目前尚不稳定 不能落地企业场景
      
      手动搭建可控智能体架构
      LangGraph
