@@ -58,7 +58,7 @@ class DBUtil:
                 database=self.database,
                 charset="utf8mb4",  # 支持中文、emoji
                 cursorclass = pymysql.cursors.DictCursor,  # 默认tuple 这里设置游标查询结果返回 dict
-                autocommit=False  # 关闭自动提交，手动控制事务self.conn.commit()  插入数据 → 测试接口 → 回滚/清理
+                autocommit=False  # 关闭自动提交，手动控制事务self.conn.commit()  插入数据 → 测试接口 → 回滚/清理 rollback
             )
 
     def close(self):
@@ -68,6 +68,7 @@ class DBUtil:
 
     # 查询封装层
     def query_one(self, sql: str, params: Tuple = None) -> Optional[Dict]:
+        self.conn.rollback()  # 结束旧事务快照 数据库校验TABLE orders
         with self.conn.cursor() as cursor:
             cursor.execute(sql, params)  # 防 SQL 注入,params 会把输入“强制当作普通字符串处理”，不会让它参与 SQL 语法解析
             return cursor.fetchone()
@@ -75,6 +76,7 @@ class DBUtil:
     # pymysql 的 execute 方法会把 ' OR '1'='1 这个完整字符串当作一个普通数据，安全地填充到 %s 占位符里。
     # SQL 语句里用 %s 占位符，参数用元组传进去，就是安全的. cursor.execute("SELECT * FROM products WHERE price > %s", (5000,))
     def query_all(self, sql: str, params: Tuple = None) -> List[Dict]:
+        self.conn.rollback()  # 结束旧事务快照 在测试中确保“每次查询都是最新数据”
         # 创建游标
         with self.conn.cursor() as cursor:
             cursor.execute(sql, params)  # cursor.execute("SELECT * FROM users")
@@ -91,7 +93,7 @@ class DBUtil:
         with self.conn.cursor() as cursor:
             # execute 用于单条写操作，executemany 用于批量写操作，两者都会返回影响行数
             affected_rows = cursor.executemany(sql, params_list)
-            self.conn.commit()
+            self.conn.commit()  # 提交事务
             return affected_rows
 
 
