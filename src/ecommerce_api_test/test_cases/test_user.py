@@ -131,11 +131,16 @@ def test_login_response_not_contains_password(user_api, test_data):
     assert "password" not in response.json()
     assert "hashed_password" not in response.json()
 
-# # 代码练习
+# # 测试框架缺失功能的测试代码练习
 # def test_get_user_profile(authenticated_client):
 #     resp = authenticated_client.get_profile()
 #     assert resp.status_code == 200
 #     assert resp.json()["username"] == authenticated_client.username
+#
+# def test_update_user_profile(authenticated_client):
+#     resp = authenticated_client.update_profile(email="new@example.com")
+#     assert resp.status_code == 200
+#     assert resp.json()["email"] == "new@example.com"
 
 
 # # src/ecommerce_api_test/test_cases/test_user.py

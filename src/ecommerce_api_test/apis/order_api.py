@@ -22,3 +22,11 @@ class OrderApi(BaseApi):
 
     def get_order(self, order_id: int):
         return self.get(f"/orders/{order_id}")
+
+    # # 未实现的功能
+    # def get_orders(self):
+    #     return self.get("/orders")
+
+    # def create_order_multiple_items(self, items: list[dict]):
+    #     payload = {"items": items}
+    #     return self.post("/orders", json=payload)

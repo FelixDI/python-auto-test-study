@@ -109,6 +109,28 @@ def test_create_order_nonexistent_product(order_api):
     order_api.assert_status_code(404)
     order_api.assert_error_message("商品不存在")
 
+# def test_create_order_with_multiple_items(order_api, product_api, db_util):
+#     product1 = product_api.create_product(name="商品A", price=100.0, stock=100)
+#     product2 = product_api.create_product(name="商品B", price=50.0, stock=50)
+#
+#     response = order_api.create_order_multiple_items(
+#         {"product_id": product1["id"], "quantity": 2},
+#         {"product_id": product2["id"], "quantity": 1},
+#     )
+#     assert response.status_code == 200
+#     order = response.json()
+#     assert order["total_price"] == product1["price"] * product1["quantity"] + \
+#         product2["price"] * product2["quantity"]
+#     assert len(order["items"]) == 2
+#
+#     db_items = db_util.query_all(
+#         "SELECT * FROM order_items WHERE order_id=%s ORDER BY product_id",
+#         (order["id"],)
+#     )
+#     assert len(db_items) == len(response.json()["items"])
+#     assert db_items[0]["product_id"] == product1["product_id"]
+#     assert db_items[1]["product_id"] == product2["product_id"]
+
 # # 测试商品夹具
 # @pytest.fixture
 # def test_product(product_api):
