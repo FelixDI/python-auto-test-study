@@ -133,6 +133,94 @@ def test_create_order_zero_quantity(order_api, product_api):
     # order_api.assert_status_code(422)
     # order_api.assert_error_message("数量必须大于0")
 
+def test_create_order_float_precision(order_api, product_api):
+    """测试浮点数价格计算精度"""
+
+    create_product_response = product_api.create_product(
+        name="精度测试商品",
+        price=0.1,
+        stock=100
+    )
+    product_id = create_product_response.json()["id"]
+
+    response = order_api.create_order(
+        product_id=product_id,
+        quantity=3
+    )
+
+    print(response.status_code)
+    print(response.json())
+
+    assert response.json()["total_price"] == 0.3  # 数据库建表DECIMAL(10,2)
+
+@pytest.mark.xfail(reason="已知缺陷：后端查询订单不检查user_id导致越权访问")
+def test_access_other_user_order(order_api, product_api, user_api, test_data):
+    """测试越权访问"""
+
+    # fixture 全局用户test_user
+    product_resp = product_api.create_product(
+        name="越权测试商品",
+        price=100.0,
+        stock=100
+    )
+    product_id = product_resp.json()["id"]  # 用于下单
+    order_resp = order_api.create_order(product_id=product_id, quantity=1)
+    order_id = order_resp.json()["id"]  # 后端定义的用于查询订单
+
+    # 退出登录
+    user_api.clear_auth_token()
+    user_b = {"username": "user_b", "password": "user_b123"}
+    user_api.register(**user_b)  # 解包
+    login_resp = user_api.login(**user_b)
+    user_api.set_auth_token(login_resp.json()["access_token"])
+
+    # api.close()之前，也就是测试未结束 user_api product_api order_api都在同一个session
+    resp = order_api.get_order(order_id)
+    print(resp.status_code)
+    print(resp.json())  # {'id': 6, 'user_id': 1, 'product_id': 7, 'quantity': 1, 'total_price': 100.0, 'status': 'paid'}
+
+    assert resp.status_code == 404, "后端未检查user_id导致越权访问"
+
+
+@pytest.mark.xfail(reason="已知缺陷：后端多线程未加锁")
+def test_concurrent_order_super_sale(order_api, product_api, db_util):
+    """测试并发下单超卖问题"""
+
+    import threading
+
+    product_resp = product_api.create_product(
+        name="秒杀商品",
+        price=100.0,
+        stock=1
+    )
+    product_id = product_resp.json()["id"]
+
+    def order_task():
+        try:
+            resp = order_api.create_order(product_id=product_id, quantity=1)
+        except:
+            pass
+
+    # 多线程并发下单
+    threads = []
+    for _ in range(10):
+        t = threading.Thread(target=order_task)
+        threads.append(t)
+        t.start()
+
+    for t in threads:
+        t.join()
+
+    # 预期只有1个订单成功，但后端没有加锁的话，可能会有多个成功
+    # 直接查询数据库写入 最准确
+    orders = db_util.query_one(
+        "SELECT COUNT(*) AS cnt FROM orders WHERE product_id=%s",
+        (product_id,)
+    )
+
+    assert orders["cnt"] == 1, "多线程并发超卖"
+
+
 # # src/ecommerce_api_test/test_cases/test_order.py
 # import pytest
 #
