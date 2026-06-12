@@ -174,8 +174,8 @@ PythonAutoTest/
      playwright实战 (POM + component object)
      selenium稍做了解
 
-- 05 AI自动化测试
-     AI提效 dify+DeepSeekv4pro 
+- 05 AI测试
+     AI测试提效 dify+DeepSeekv4pro 
      创建工作流,设计测试用例、生成测试代码  ✅
      
      AI测试智能体：
@@ -201,6 +201,9 @@ PythonAutoTest/
        MCP （代码实现MCP服务器 大脑和手之间的“通用翻译官”和“连接中枢”）
         ↓
      连接外部工具
+     
+     智能 CI/CD 编排平台Harness Pipeline 编排 + 自动化决策
+     Locust 性能测试
 ```
 
 ## 测试报告

@@ -83,6 +83,49 @@ def test_create_product_with_invalid_auth(user_api, test_data):
     user_api.assert_status_code(401)
     user_api.assert_error_message("无法验证凭据")
 
+@pytest.mark.xfail(reason="已知缺陷：商品价格为负数，依然正常创建商品")
+def test_create_product_negative_price(product_api):
+    response = product_api.create_product(
+        name="负数价格商品",
+        price=-999.0,
+        stock=100,
+    )
+    print(response.status_code)
+    print(response.json())
+
+    assert response.status_code == 422, "价格为负数也成功创建商品"
+    # 期望行为
+    # product_api.assert_status_code(422)
+    # product_api.assert_error_message("价格必须大于0")
+
+@pytest.mark.xfail(reason="已知缺陷：商品价格为零，依然正常创建商品")
+def test_create_product_zero_price(product_api):
+    response = product_api.create_product(
+        name="零价商品",
+        price=0,
+        stock=100,
+    )
+    print(response.status_code)
+    print(response.json())
+
+    assert response.status_code == 422, "价格为0也成功创建商品"
+
+    # product_api.assert_status_code(422)
+    # product_api.assert_error_message("价格必须大于0")
+
+@pytest.mark.xfail(reason="已知缺陷：库存为负的商品依然被创建")
+def test_create_product_negative_stock(product_api):
+    response = product_api.create_product(
+        name="负库存商品",
+        price=100.0,
+        stock=-100,
+    )
+    print(response.status_code)
+    print(response.json())
+
+    assert response.status_code == 422, "库存为负的商品被创建"
+    # product_api.assert_status_code(422)
+    # product_api.assert_error_message("库存必须大于等于0")
 
 # # src/ecommerce_api_test/test_cases/test_product.py
 # import pytest

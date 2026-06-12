@@ -93,6 +93,45 @@ def test_create_order_without_auth(user_api):
     # user_api.assert_error_message("无法验证凭据")
     user_api.assert_error_message("Not authenticated")  # 后端没定义 无token的返回信息 fastapi默认Not authenticated
 
+@pytest.mark.xfail(reason="已知缺陷：订单数量为负也创建订单，导致库存增加严重业务BUG")
+def test_create_order_negative_quantity(order_api, product_api):
+    create_product_response = product_api.create_product(
+        name="测试商品",
+        price=100.0,
+        stock=100
+    )
+    product_id = create_product_response.json()["id"]
+
+    response = order_api.create_order(
+        product_id=product_id,
+        quantity=-1,
+    )
+
+    print(response.status_code)
+    print(response.json())
+
+    assert response.status_code == 422, "下单数量为负"
+
+    # order_api.assert_status_code(422)
+    # order_api.assert_error_message("下单数量必须大于0")
+
+@pytest.mark.xfail(reason="已知缺陷：下单数量为零也创建订单")
+def test_create_order_zero_quantity(order_api, product_api):
+    create_product_response = product_api.create_product(
+        name="测试商品",
+        price=100.0,
+        stock=100
+    )
+    product_id = create_product_response.json()["id"]
+    response = order_api.create_order(product_id=product_id, quantity=0)
+
+    print(response.status_code)
+    print(response.json())
+
+    assert response.status_code == 422, "零数量订单依然成功下单"
+
+    # order_api.assert_status_code(422)
+    # order_api.assert_error_message("数量必须大于0")
 
 # # src/ecommerce_api_test/test_cases/test_order.py
 # import pytest
