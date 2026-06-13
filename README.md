@@ -52,6 +52,7 @@ PythonAutoTest/
 │   │   ├── db/
 │   │   │   └── schema.sql
 │   │   ├── test_cases/
+│   │   │   ├── temp.py
 │   │   │   ├── test_order.py
 │   │   │   ├── test_product.py
 │   │   │   └── test_user.py
@@ -120,6 +121,7 @@ PythonAutoTest/
 │   │   ├── data/
 │   │   ├── server/
 │   │   │   ├── app/
+│   │   │   │   ├── lastest.py
 │   │   │   │   ├── main.py
 │   │   │   │   └── temp.py
 │   │   │   ├── Dockerfile
@@ -144,13 +146,14 @@ PythonAutoTest/
 │       ├── test_saucedemo.py
 │       └── testcases_ai_generated.md
 ├── docker-compose.yml
+├── Jenkinsfile
 ├── pytest.ini
 ├── README.md
 ├── requirements.txt
 ├── testgitpush.py
 └── update_tree.py
 
-31 directories, 94 files
+31 directories, 97 files
 ```
 <!-- PROJECT_STRUCTURE_END -->
 
@@ -164,7 +167,7 @@ PythonAutoTest/
      gitclone本地部署dify，配置DeepSeekv4pro API key
      
 - 02 Python 基础学习 ✅
-     core python programing 书本代码边敲边忘
+     core python programing 书本代码学习效率较低
      Python 基础语法回顾（面向自动化测试）目标复习自动化测试高频用到的 Python 语法。
 
 - 03 电商接口测试项目实战 ✅

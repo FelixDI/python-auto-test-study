@@ -13,13 +13,16 @@ import pytest
 
 
 @pytest.mark.smoke
-def test_create_product(product_api, test_data):
+def test_create_product(product_api, db_util, test_data):
     product_data = test_data["products"][0]  # 三个商品的字典列表
     response = product_api.create_product(
         name=product_data["name"],
         price=product_data["price"],
         stock=product_data["stock"],
     )
+    product_id = response.json()["id"]
+
+    print(response.json())
 
     product_api.assert_status_code(200)
     product_api.assert_json_contains({
@@ -28,6 +31,17 @@ def test_create_product(product_api, test_data):
         "stock": product_data["stock"],
     })
     product_api.assert_json_has_fields(["id"])
+
+    # 数据库校验
+    db_product = db_util.query_one(
+        "SELECT name, price, stock FROM products WHERE id=%s",
+        (product_id,)
+    )
+    print(db_product)
+    assert db_product is not None
+    assert db_product["name"] == product_data["name"]
+    assert db_product["price"] == product_data["price"]
+    assert db_product["stock"] == product_data["stock"]
 
 def test_list_products(product_api, test_data):
     response = product_api.list_products()
