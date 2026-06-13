@@ -25,7 +25,7 @@ pipeline {
                 sh '''
                 . venv/bin/activate
 
-                pytest src/stage2_api_test \
+                pytest src/ecommerce_api_test \
                     --alluredir=allure-results
                 '''
             }
