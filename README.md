@@ -135,16 +135,18 @@ PythonAutoTest/
 │   │       ├── test_param_auth.py
 │   │       ├── test_schema.py
 │   │       └── test_users_crud.py
-│   └── stage3_ui_test/
-│       ├── conftest.py
-│       ├── test_ai_generated.py
-│       ├── test_saucedemo_allure.py
-│       ├── test_saucedemo_assert.py
-│       ├── test_saucedemo_flow.py
-│       ├── test_saucedemo_login.py
-│       ├── test_saucedemo_selenium.py
-│       ├── test_saucedemo.py
-│       └── testcases_ai_generated.md
+│   ├── stage3_ui_test/
+│   │   ├── conftest.py
+│   │   ├── test_ai_generated.py
+│   │   ├── test_saucedemo_allure.py
+│   │   ├── test_saucedemo_assert.py
+│   │   ├── test_saucedemo_flow.py
+│   │   ├── test_saucedemo_login.py
+│   │   ├── test_saucedemo_selenium.py
+│   │   ├── test_saucedemo.py
+│   │   └── testcases_ai_generated.md
+│   └── stage4_ai_test/
+│       └── dify/
 ├── docker-compose.yml
 ├── Jenkinsfile
 ├── pytest.ini
@@ -153,7 +155,7 @@ PythonAutoTest/
 ├── testgitpush.py
 └── update_tree.py
 
-31 directories, 97 files
+33 directories, 97 files
 ```
 <!-- PROJECT_STRUCTURE_END -->
 
