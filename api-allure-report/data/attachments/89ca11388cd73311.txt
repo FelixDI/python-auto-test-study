@@ -1,0 +1,2 @@
+{'name': 'iPhone 15 Pro', 'price': 7999.0, 'stock': 100, 'id': 9}
+{'name': 'iPhone 15 Pro', 'price': 7999.0, 'stock': 100}
