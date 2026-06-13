@@ -23,20 +23,22 @@ pipeline {
         stage('运行接口测试') {
             steps {
                 sh '''
-                    . venv/bin/activate
-                    mkdir -p reports
-                    python3 -m pytest src/ecommerce_api_test/test_cases/ -v --html=reports/api_report.html --self-contained-html
+                . venv/bin/activate
+
+                pytest src/stage2_api_test \
+                    --alluredir=allure-results
                 '''
             }
         }
     }
+
     post {
         always {
-            publishHTML target: [
-                reportDir: 'reports',
-                reportFiles: 'api_report.html',
-                reportName: '接口测试报告'
-            ]
+            allure(
+                includeProperties: false,
+                jdk: '',
+                results: [[path: 'allure-results']]
+            )
         }
     }
 }
