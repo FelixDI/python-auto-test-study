@@ -56,10 +56,11 @@ def test_create_order_correctly_deducts_stock(order_api, product_api, db_util, t
     updated_product = product_api.get_product(product_id).json()
     assert updated_product["stock"] == initial_stock - order_data["quantity"]
 
-    # 数据库校验
-    # 订单记录
+    # 数据库校验 订单记录
     # 关于数据库建表 当前表均有id， 下一层级的表会写相关表的id用于查询
     # 比如我们用玩具后端 users、products SQL语句写id； order写了user_id、product_id
+    # 即在关系型数据库中，子表通过外键（foreign key）持有父表的主键（primary key），
+    # 从而建立数据之间的一对多或多对一关系，实现数据归属和关联查询能力。
     db_order = db_util.query_one(
         "SELECT id, user_id, status FROM orders WHERE id=%s",  # 数据库建表id 建表order_items一般才写order_id用于查订单
         (order_id,)
@@ -113,23 +114,34 @@ def test_create_order_nonexistent_product(order_api):
 #     product1 = product_api.create_product(name="商品A", price=100.0, stock=100)
 #     product2 = product_api.create_product(name="商品B", price=50.0, stock=50)
 #
-#     response = order_api.create_order_multiple_items(
+#     # 第一种是“显式传参（关键字参数）”，第二种是“位置参数（positional argument）
+#     items = [
 #         {"product_id": product1["id"], "quantity": 2},
 #         {"product_id": product2["id"], "quantity": 1},
-#     )
-#     assert response.status_code == 200
-#     order = response.json()
-#     assert order["total_price"] == product1["price"] * product1["quantity"] + \
-#         product2["price"] * product2["quantity"]
-#     assert len(order["items"]) == 2
+#     ]
+#     response = order_api.create_order_multiple_items(items=items)
 #
+#     # response = order_api.create_order_multiple_items([
+#     #     {"product_id": product1["id"], "quantity": 2},
+#     #     {"product_id": product2["id"], "quantity": 1},
+#     # ])
+#
+#     assert response.status_code == 200
+#     # 一般企业做法是create_order返回订单摘要 get_order返回详细订单明细 才会有"items": [{},{}...]
+#     print(response.json())  # 接口校验 看响应返回的结构体 API响应是后端组装出来的JSON
+#     order = response.json()
+#     order_id = order["id"]
+#     assert order["total_price"] == product1["price"] * items[0]["quantity"] + \
+#         product2["price"] * items[1]["quantity"]
+#
+#     # 数据库校验 看TABLE
 #     db_items = db_util.query_all(
 #         "SELECT * FROM order_items WHERE order_id=%s ORDER BY product_id",
-#         (order["id"],)
+#         (order_id,)
 #     )
-#     assert len(db_items) == len(response.json()["items"])
-#     assert db_items[0]["product_id"] == product1["product_id"]
-#     assert db_items[1]["product_id"] == product2["product_id"]
+#     assert len(db_items) == 2
+#     assert db_items[0]["product_id"] == product1["id"]
+#     assert db_items[1]["product_id"] == product2["id"]
 
 # # 测试商品夹具
 # @pytest.fixture
@@ -154,6 +166,7 @@ def test_get_order_detail(order_api, product_api, test_data):
 
     response = order_api.get_order(order_id)
     order_api.assert_status_code(200)
+    print(response.json())
     order_api.assert_json_contains({
         "id": order_id,
         "product_id": product_id,
