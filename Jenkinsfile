@@ -23,7 +23,7 @@ pipeline {
         stage('运行接口测试') {
             steps {
                 sh '''
-                    source venv/bin/activate
+                    . venv/bin/activate
                     mkdir -p reports
                     python3 -m pytest src/ecommerce_api_test/test_cases/ -v --html=reports/api_report.html --self-contained-html
                 '''
