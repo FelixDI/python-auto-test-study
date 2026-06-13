@@ -32,3 +32,11 @@ class ProductApi(BaseApi):
 
     # def delete_product(self, product_id: int):
     #     return self.delete(f"/products/{product_id}")
+    #
+    # def update_product(self, product_id: int, name: str, price: float, stock: int):
+    #     payload = {
+    #         "name": name,
+    #         "price": price,
+    #         "stock": stock
+    #     }
+    #     return self.put(f"/products/{product_id}", json=payload)

@@ -141,6 +141,43 @@ def test_create_product_negative_stock(product_api):
     # product_api.assert_status_code(422)
     # product_api.assert_error_message("库存必须大于等于0")
 
+# # 后端未设计功能的测试代码练习
+# @pytest.fixture
+# def test_product(product_api):
+#     response = product_api.create_product(name="测试商品", price=100.0, stock=100)
+#     product_id = response.json()["id"]
+#     yield response.json()
+#     product_api.delete_product(product_id)
+#
+# def test_update_product(product_api, test_product, db_util):
+#     update_data = {"name": "更新后的商品", "price": 199.0, "stock": 50}
+#
+#     response = product_api.update_product(product_id=test_product["id"], **update_data)
+#     assert response.status_code == 200
+#     assert response.json()["name"] == update_data["name"]
+#
+#     db_product = db_util.query_one(
+#         "SELECT name, price, stock FROM products WHERE id=%s",
+#         (test_product["id"],)
+#     )
+#     assert db_product["name"] == update_data["name"]
+#     assert db_product["price"] == update_data["price"]
+#     assert db_product["stock"] == update_data["stock"]
+#
+# def test_delete_product(product_api, db_util):
+#     resp = product_api.create_product(name="待删除商品", price=99.0, stock=50)
+#     product_id = resp.json()["id"]
+#
+#     response = product_api.delete_product(product_id)
+#     assert response.status_code == 204
+#
+#     db_product = db_util.query_one(
+#         "SELECT id FROM products WHERE id=%s",
+#         (product_id,)
+#     )
+#     assert db_product is None
+
+
 # # src/ecommerce_api_test/test_cases/test_product.py
 # import pytest
 #
