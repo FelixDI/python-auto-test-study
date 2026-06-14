@@ -187,7 +187,7 @@ PythonAutoTest/
      AI测试智能体：
      Hermes智能体 自我进化优势突出，但目前尚不稳定 不能落地企业场景
      
-     手动搭建可控智能体架构
+     搭建可控智能体架构  LLM + Harness Engineering
      LangGraph
         ↓
      控制Agent流程
@@ -208,8 +208,8 @@ PythonAutoTest/
         ↓
      连接外部工具
      
-     智能 CI/CD 编排平台Harness Pipeline 编排 + 自动化决策
-     Locust 性能测试
+ 
+     Locust 压力测试
 ```
 
 ## 测试报告
