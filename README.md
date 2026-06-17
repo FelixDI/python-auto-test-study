@@ -29,7 +29,8 @@ PythonAutoTest/
 │   ├── 01_搭建环境踩坑.md
 │   ├── 02_测试理论.md
 │   ├── 03_补充.md
-│   └── 04_UI测试POM踩坑.md
+│   ├── 04_UI测试POM踩坑.md
+│   └── 05_dify踩坑.md
 ├── reports/
 │   ├── playwright/
 │   │   ├── saucedemo_after_login.png
@@ -147,6 +148,24 @@ PythonAutoTest/
 │   │   └── testcases_ai_generated.md
 │   └── stage4_ai_test/
 │       └── dify/
+│           ├── examples/
+│           │   └── api_test/
+│           │       ├── demo_code.py
+│           │       ├── demo_input.txt
+│           │       └── demo_testcase.md
+│           ├── knowledge_base/
+│           │   ├── common_rules/
+│           │   │   ├── 测试用例设计规范.md
+│           │   │   ├── 测试报告模板.md
+│           │   │   └── Pytest 代码编写规范.md
+│           │   ├── fakestoreapi_api/
+│           │   │   ├── fakestoreapi-openapi.json
+│           │   │   ├── FakeStoreAPI接口文档.md
+│           │   │   ├── FakeStoreAPI补充说明.md
+│           │   │   └── try.md
+│           │   └── saucedemo_ui/
+│           └── workflows/
+│               └── ai_test_workflow.yml
 ├── docker-compose.yml
 ├── Jenkinsfile
 ├── pytest.ini
@@ -155,7 +174,7 @@ PythonAutoTest/
 ├── testgitpush.py
 └── update_tree.py
 
-33 directories, 97 files
+40 directories, 109 files
 ```
 <!-- PROJECT_STRUCTURE_END -->
 
