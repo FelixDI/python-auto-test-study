@@ -1,5 +1,5 @@
 # python-auto-test-study
-python自动化测试入门到实战
+python自动化测试入门到项目实战
 
 ## 学习路线图
 
@@ -18,7 +18,7 @@ flowchart LR
 
 
 # Python 自动化测试学习
-  最终目标：接口测试、UI测试、AI测试工作流提效、测试智能体
+  最终目标：接口测试、UI测试、AI测试提效、测试智能体
 
 ## 目录结构
 
@@ -158,14 +158,16 @@ PythonAutoTest/
 │           │   │   ├── 测试用例设计规范.md
 │           │   │   ├── 测试报告模板.md
 │           │   │   └── Pytest 代码编写规范.md
-│           │   ├── fakestoreapi_api/
-│           │   │   ├── fakestoreapi-openapi.json
-│           │   │   ├── FakeStoreAPI接口文档.md
-│           │   │   ├── FakeStoreAPI补充说明.md
-│           │   │   └── try.md
-│           │   └── saucedemo_ui/
+│           │   └── fakestoreapi_api/
+│           │       ├── fakestoreapi-openapi.json
+│           │       ├── FakeStoreAPI接口文档.md
+│           │       ├── FakeStoreAPI补充说明.md
+│           │       └── try.md
 │           └── workflows/
 │               └── ai_test_workflow.yml
+├── 自动化测试工程师简历.md
+├── 简历.md
+├── 尽量简化简历.md
 ├── docker-compose.yml
 ├── Jenkinsfile
 ├── pytest.ini
@@ -174,7 +176,7 @@ PythonAutoTest/
 ├── testgitpush.py
 └── update_tree.py
 
-40 directories, 109 files
+39 directories, 112 files
 ```
 <!-- PROJECT_STRUCTURE_END -->
 
@@ -185,23 +187,24 @@ PythonAutoTest/
 - 01 环境搭建完成 ✅
      miniforge+pycharm+git+github
      docker desktop(fastapi+mysql+Jenkins)
-     gitclone本地部署dify，配置DeepSeekv4pro API key
+     gitclone到本地启动dify容器，配置deepseek-v4-pro API key
      
 - 02 Python 基础学习 ✅
      core python programing 书本代码学习效率较低
      Python 基础语法回顾（面向自动化测试）目标复习自动化测试高频用到的 Python 语法。
 
 - 03 电商接口测试项目实战 ✅
-     pytest + requests + pymysql + Allure + Jenkins + Docker
+     Pytest · Requests · pymysql · Docker · Jenkins · GitHub Actions · Allure
      AOP重构 + 数据库校验
      
 - 04 SauceDemo项目实战UI自动化测试 ✅
+     Playwright · Pytest · pytest-playwright · GitHub Actions · Allure
      playwright实战 (POM + component object)
-     selenium对比代码区别快速上手
+     selenium代码快速上手
 
 - 05 AI测试
-     AI测试提效 dify+DeepSeekv4pro 
-     创建工作流,设计测试用例、生成测试代码  ✅
+     AI测试提效 dify+DeepSeekv4pro -> ai_test_workflow.yml
+     创建知识库、工作流，实现FakeStoreAPI接口测试网站用例/代码自动生成  ✅
      
      AI测试智能体：
      Hermes智能体 自我进化优势突出，但目前尚不稳定 不能落地企业场景
