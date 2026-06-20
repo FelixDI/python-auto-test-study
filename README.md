@@ -53,7 +53,6 @@ PythonAutoTest/
 │   │   ├── db/
 │   │   │   └── schema.sql
 │   │   ├── test_cases/
-│   │   │   ├── temp.py
 │   │   │   ├── test_order.py
 │   │   │   ├── test_product.py
 │   │   │   └── test_user.py
@@ -119,12 +118,9 @@ PythonAutoTest/
 │   │       ├── test_unittest_demo.py
 │   │       └── test_user_api.py
 │   ├── stage2_api_test/
-│   │   ├── data/
 │   │   ├── server/
 │   │   │   ├── app/
-│   │   │   │   ├── lastest.py
-│   │   │   │   ├── main.py
-│   │   │   │   └── temp.py
+│   │   │   │   └── main.py
 │   │   │   ├── Dockerfile
 │   │   │   └── requirements.txt
 │   │   └── test_cases/
@@ -161,13 +157,9 @@ PythonAutoTest/
 │           │   └── fakestoreapi_api/
 │           │       ├── fakestoreapi-openapi.json
 │           │       ├── FakeStoreAPI接口文档.md
-│           │       ├── FakeStoreAPI补充说明.md
-│           │       └── try.md
+│           │       └── FakeStoreAPI补充说明.md
 │           └── workflows/
 │               └── ai_test_workflow.yml
-├── 自动化测试工程师简历.md
-├── 简历.md
-├── 尽量简化简历.md
 ├── docker-compose.yml
 ├── Jenkinsfile
 ├── pytest.ini
@@ -176,7 +168,7 @@ PythonAutoTest/
 ├── testgitpush.py
 └── update_tree.py
 
-39 directories, 112 files
+38 directories, 105 files
 ```
 <!-- PROJECT_STRUCTURE_END -->
 

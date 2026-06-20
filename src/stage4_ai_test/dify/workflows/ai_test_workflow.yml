@@ -1,0 +1,491 @@
+app:
+  description: ''
+  icon: 🤖
+  icon_background: '#FFEAD5'
+  icon_type: emoji
+  mode: workflow
+  name: autotest
+  use_icon_as_answer_icon: false
+dependencies:
+- current_identifier: null
+  type: marketplace
+  value:
+    marketplace_plugin_unique_identifier: langgenius/deepseek:0.0.17@f7a5c1d222d17ee419b17a80d6e4923838fe93788dc724a3af73fbc6990b3a32
+    version: null
+- current_identifier: null
+  type: marketplace
+  value:
+    marketplace_plugin_unique_identifier: langgenius/siliconflow:0.0.56@146782fa473203f20f37169c191d706f9afc8b75606eeaba965f70800e8d606d
+    version: null
+kind: app
+version: 0.6.0
+workflow:
+  conversation_variables: []
+  environment_variables: []
+  features:
+    file_upload:
+      allowed_file_extensions:
+      - .JPG
+      - .JPEG
+      - .PNG
+      - .GIF
+      - .WEBP
+      - .SVG
+      allowed_file_types:
+      - image
+      allowed_file_upload_methods:
+      - local_file
+      - remote_url
+      enabled: false
+      fileUploadConfig:
+        attachment_image_file_size_limit: 2
+        audio_file_size_limit: 50
+        batch_count_limit: 5
+        file_size_limit: 15
+        file_upload_limit: 20
+        image_file_batch_limit: 10
+        image_file_size_limit: 10
+        single_chunk_attachment_limit: 10
+        video_file_size_limit: 100
+        workflow_file_upload_limit: 10
+      image:
+        enabled: false
+        number_limits: 3
+        transfer_methods:
+        - local_file
+        - remote_url
+      number_limits: 3
+    opening_statement: ''
+    retriever_resource:
+      enabled: true
+    sensitive_word_avoidance:
+      enabled: false
+    speech_to_text:
+      enabled: false
+    suggested_questions: []
+    suggested_questions_after_answer:
+      enabled: false
+    text_to_speech:
+      enabled: false
+      language: ''
+      voice: ''
+  graph:
+    edges:
+    - data:
+        isInLoop: false
+        sourceType: llm
+        targetType: llm
+      id: 1781514646478-source-1781512368624-target
+      selected: false
+      source: '1781514646478'
+      sourceHandle: source
+      target: '1781512368624'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: llm
+        targetType: template-transform
+      id: 1781512368624-source-1781517278020-target
+      selected: false
+      source: '1781512368624'
+      sourceHandle: source
+      target: '1781517278020'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: template-transform
+        targetType: end
+      id: 1781517278020-source-1781512374947-target
+      selected: false
+      source: '1781517278020'
+      sourceHandle: source
+      target: '1781512374947'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: start
+        targetType: knowledge-retrieval
+      id: 1781512303645-source-1781621830644-target
+      source: '1781512303645'
+      sourceHandle: source
+      target: '1781621830644'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: knowledge-retrieval
+        targetType: llm
+      id: 1781621830644-source-1781621910813-target
+      source: '1781621830644'
+      sourceHandle: source
+      target: '1781621910813'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: llm
+        targetType: llm
+      id: 1781621910813-source-1781514646478-target
+      source: '1781621910813'
+      sourceHandle: source
+      target: '1781514646478'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    nodes:
+    - data:
+        selected: false
+        title: 用户输入
+        type: start
+        variables:
+        - default: ''
+          hint: ''
+          label: user_query
+          options: []
+          placeholder: ''
+          required: true
+          type: text-input
+          variable: user_query
+      height: 109
+      id: '1781512303645'
+      position:
+        x: 0
+        y: 0
+      positionAbsolute:
+        x: 0
+        y: 0
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        context:
+          enabled: true
+          variable_selector:
+          - '1781514646478'
+          - text
+        model:
+          completion_params:
+            temperature: 0.7
+          mode: chat
+          name: deepseek-v4-pro
+          provider: langgenius/deepseek/deepseek
+        prompt_template:
+        - id: 5fbc5484-a282-4d7d-9d62-ac3c1a4874da
+          role: system
+          text: '### 角色定位
+
+            你是一名高级Python自动化测试开发工程师，精通Pytest框架与Requests库，代码严格遵循PEP8编码规范。
+
+
+            ### 参考资料规则
+
+            下方是知识库检索到的编码规范与接口文档，代码中的接口地址、请求参数、字段断言必须严格匹配参考资料，**禁止编造不存在的接口与字段**。
+
+            <知识库参考资料>
+
+            {{#context#}}
+
+            </知识库参考资料>
+
+
+            ### 核心任务
+
+            基于上游的测试用例，生成可直接运行的Pytest自动化测试代码：
+
+            1. 所有用例对应独立的测试函数
+
+            2. 使用requests库发送接口请求
+
+            3. 包含完整的响应断言（状态码、核心字段、业务逻辑校验）
+
+            4. 异常用例做针对性的错误校验
+
+
+            ### 输出要求
+
+            1. 只输出完整的Python代码，可直接复制保存为.py文件运行
+
+            2. 代码结构清晰，包含必要的注释，无冗余内容
+
+            3. 测试函数命名遵循test_xxx规范，符合Pytest识别规则
+
+            4. 不输出代码以外的解释性文字、客套话'
+        - id: ce6394cb-567b-426e-9ddf-519c89cc2e6a
+          role: user
+          text: '### 上游用例输入
+
+            {{#1781514646478.text#}}'
+        selected: true
+        title: 代码生成
+        type: llm
+        vision:
+          enabled: false
+      height: 88
+      id: '1781512368624'
+      position:
+        x: 1368
+        y: 77.66666666666666
+      positionAbsolute:
+        x: 1368
+        y: 77.66666666666666
+      selected: true
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        outputs:
+        - value_selector:
+          - '1781517278020'
+          - output
+          value_type: string
+          variable: output
+        selected: false
+        title: 输出
+        type: end
+      height: 88
+      id: '1781512374947'
+      position:
+        x: 2052
+        y: 101
+      positionAbsolute:
+        x: 2052
+        y: 101
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        context:
+          enabled: true
+          variable_selector:
+          - '1781621910813'
+          - text
+        model:
+          completion_params:
+            temperature: 0.7
+          mode: chat
+          name: deepseek-v4-pro
+          provider: langgenius/deepseek/deepseek
+        prompt_template:
+        - id: 1d7d5008-1db1-45ff-ba1e-8c5fc18ea6cf
+          role: system
+          text: '### 角色定位
+
+            你是一名资深接口测试工程师，精通RESTful API测试用例设计，严格遵循等价类划分、边界值分析的测试方法论。
+
+
+            ### 参考资料规则
+
+            下方是知识库检索到的接口文档与测试规范，所有用例的接口地址、请求参数、返回字段必须严格基于参考资料，**禁止编造任何不存在的字段、接口与业务规则**。
+
+            <知识库参考资料>
+
+            {{#context#}}
+
+            </知识库参考资料>
+
+
+            ### 核心任务
+
+            基于上游的测试需求分析结论，结合知识库规范，输出完整的接口测试用例：
+
+            1. 覆盖全部核心业务场景的正常用例
+
+            2. 覆盖参数异常、权限异常、业务逻辑异常的异常用例
+
+            3. 覆盖参数边界值、数据极值的边界用例
+
+
+            ### 输出要求
+
+            1. 用Markdown表格呈现，固定列：用例ID、用例名称、请求方式、接口路径、入参说明、预期结果
+
+            2. 用例分类清晰，正常/异常/边界场景分组标注
+
+            3. 预期结果明确可校验，无模糊描述
+
+            4. 不输出冗余客套话，只输出用例表格与必要的分级标题'
+        - id: 5d4bd57e-51cc-4474-b77b-e2eab1e754f3
+          role: user
+          text: '### 上游需求输入
+
+            {{#1781621910813.text#}}'
+        selected: false
+        title: 设计测试用例
+        type: llm
+        vision:
+          enabled: false
+      height: 88
+      id: '1781514646478'
+      position:
+        x: 1023.1428571428571
+        y: 61.57142857142857
+      positionAbsolute:
+        x: 1023.1428571428571
+        y: 61.57142857142857
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        selected: false
+        template: '## 📋 接口测试用例
+
+          {{ md }}
+
+
+          ---
+
+
+          ## 💻 Pytest 自动化代码
+
+          {{ py }}'
+        title: 模板转换
+        type: template-transform
+        variables:
+        - value_selector:
+          - '1781514646478'
+          - text
+          value_type: string
+          variable: md
+        - value_selector:
+          - '1781512368624'
+          - text
+          value_type: string
+          variable: py
+      height: 52
+      id: '1781517278020'
+      position:
+        x: 1710
+        y: 110.33333333333334
+      positionAbsolute:
+        x: 1710
+        y: 110.33333333333334
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        dataset_ids:
+        - XtafRRQQSrH7iIpu2M8mG8uq3hLYHQnuZXaAMYuuNW3m4hRYj4tDGG/dOnExKeF1
+        - +jgd6RuCGrjM+GEEENyNka1Uy8PAlSYrl1O9sPZeOULsDfFEELXMLN4h2+KyoSSL
+        multiple_retrieval_config:
+          reranking_enable: true
+          reranking_mode: reranking_model
+          reranking_model:
+            model: BAAI/bge-reranker-v2-m3
+            provider: langgenius/siliconflow/siliconflow
+          score_threshold: null
+          top_k: 10
+        query_attachment_selector: []
+        query_variable_selector:
+        - '1781512303645'
+        - user_query
+        retrieval_mode: multiple
+        selected: false
+        title: 知识检索
+        type: knowledge-retrieval
+      height: 118
+      id: '1781621830644'
+      position:
+        x: 342
+        y: 13.666666666666657
+      positionAbsolute:
+        x: 342
+        y: 13.666666666666657
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        context:
+          enabled: true
+          variable_selector:
+          - '1781621830644'
+          - result
+        model:
+          completion_params:
+            temperature: 0.7
+          mode: chat
+          name: deepseek-v4-pro
+          provider: langgenius/deepseek/deepseek
+        prompt_template:
+        - id: 2585ae86-8a02-4af7-ac5a-84266d29feaf
+          role: system
+          text: '### 角色定位
+
+            你是一名资深测试架构师，拥有10年以上接口自动化测试经验，精通测试需求分析与用例体系设计。
+
+
+            ### 参考资料规则
+
+            下方是知识库检索到的官方规范与接口文档，你所有的分析结论必须严格基于参考资料内容，**绝对禁止编造资料中不存在的接口、字段与业务规则**。
+
+            <知识库参考资料>
+
+            {{#context#}}
+
+            </知识库参考资料>
+
+
+            ### 核心任务
+
+            结合用户需求与参考资料，完成完整的测试需求分析：
+
+            1. 明确待测接口模块、核心业务逻辑与校验规则
+
+            2. 梳理本次测试必须遵守的规范标准（用例设计规范、代码编写规范）
+
+            3. 明确需要覆盖的测试场景分类（正常流程、异常入参、边界值、权限校验等）
+
+
+            ### 输出要求
+
+            1. 使用 Markdown 分级标题排版，结构清晰
+
+            2. 结论明确，不输出冗余客套话
+
+            3. 所有提到的接口、字段必须与知识库资料完全一致/'
+        - id: 8b7e37ea-3fbc-4758-857e-66843d43d383
+          role: user
+          text: '###用户需求
+
+            {{#1781512303645.user_query#}}'
+        selected: false
+        title: 需求梳理
+        type: llm
+        vision:
+          enabled: false
+      height: 88
+      id: '1781621910813'
+      position:
+        x: 684
+        y: 48.333333333333314
+      positionAbsolute:
+        x: 684
+        y: 48.333333333333314
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    viewport:
+      x: -989
+      y: 129
+      zoom: 0.7
+  rag_pipeline_variables: []
