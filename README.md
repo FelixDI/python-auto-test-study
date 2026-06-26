@@ -31,6 +31,13 @@ PythonAutoTest/
 │   ├── 03_补充.md
 │   ├── 04_UI测试POM踩坑.md
 │   └── 05_dify踩坑.md
+├── performance/
+│   ├── reports/
+│   │   ├── locustfile_httpbingo_20260626_235955_u50_r5_t10s.html
+│   │   ├── locustfile_httpbingo_20260627_001136_u50_r5_t10s.html
+│   │   └── locustfile_httpbingo_20260627_002148_u100_r10_t50s.html
+│   ├── locustfile_httpbingo.py
+│   └── run_performance.sh
 ├── reports/
 │   ├── playwright/
 │   │   ├── saucedemo_after_login.png
@@ -168,7 +175,7 @@ PythonAutoTest/
 ├── testgitpush.py
 └── update_tree.py
 
-38 directories, 105 files
+40 directories, 110 files
 ```
 <!-- PROJECT_STRUCTURE_END -->
 
