@@ -36,6 +36,7 @@ PythonAutoTest/
 │   │   ├── locustfile_httpbingo_20260626_235955_u50_r5_t10s.html
 │   │   ├── locustfile_httpbingo_20260627_001136_u50_r5_t10s.html
 │   │   └── locustfile_httpbingo_20260627_002148_u100_r10_t50s.html
+│   ├── httpbingo.jmx
 │   ├── locustfile_httpbingo.py
 │   └── run_performance.sh
 ├── reports/
@@ -175,7 +176,7 @@ PythonAutoTest/
 ├── testgitpush.py
 └── update_tree.py
 
-40 directories, 110 files
+40 directories, 111 files
 ```
 <!-- PROJECT_STRUCTURE_END -->
 
