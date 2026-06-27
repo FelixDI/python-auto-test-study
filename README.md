@@ -48,6 +48,14 @@ PythonAutoTest/
 │   ├── api_test_report.html
 │   ├── stage2_final_report.html
 │   └── test_report_20260515_204741.txt
+├── scripts/
+│   ├── data/
+│   │   ├── orders.json
+│   │   ├── register_cases.yaml
+│   │   └── users.json
+│   ├── generate_nested_json.py
+│   ├── generate_register_yaml.py
+│   └── generate_users_json.py
 ├── src/
 │   ├── ecommerce_api_test/
 │   │   ├── apis/
@@ -176,7 +184,7 @@ PythonAutoTest/
 ├── testgitpush.py
 └── update_tree.py
 
-40 directories, 111 files
+42 directories, 117 files
 ```
 <!-- PROJECT_STRUCTURE_END -->
 
@@ -196,6 +204,7 @@ PythonAutoTest/
 - 03 电商接口测试项目实战 ✅
      Pytest · Requests · pymysql · Docker · Jenkins · GitHub Actions · Allure
      AOP重构 + 数据库校验
+     https://httpbingo.org 实践Jmeter、Locust 性能测试
      
 - 04 SauceDemo项目实战UI自动化测试 ✅
      Playwright · Pytest · pytest-playwright · GitHub Actions · Allure
@@ -229,9 +238,6 @@ PythonAutoTest/
        MCP （代码实现MCP服务器 大脑和手之间的“通用翻译官”和“连接中枢”）
         ↓
      连接外部工具
-     
- 
-     Locust 压力测试
 ```
 
 ## 测试报告
